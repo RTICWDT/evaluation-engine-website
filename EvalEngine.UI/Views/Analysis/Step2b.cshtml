@@ -1,0 +1,590 @@
+﻿@{
+    ViewBag.Title = "Step 2. Define Analysis";
+}
+
+@model EvalEngine.UI.Models.Step2BModel
+
+  @using (Html.BeginForm())
+  {
+	@Html.AntiForgeryToken()
+    int outcome_number = 0;
+<style>
+div.item {white-space: nowrap;display:inline;margin-left:10px;line-height:2em; }
+div.item label{
+	margin-left:8px;
+	vertical-align:baseline;
+}
+span.block
+{
+	padding-left:10px;
+}
+div.measures{ padding-left:15px;}
+</style>
+<div class="form-container">
+	<div class="form-step step-2"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="Define Analysis" /></div>
+	<div class="form-tips helpful-info">
+		<h2>Helpful Information</h2>
+        <ul><li>You may want to conduct multiple related analyses. Include a brief title for this report that will help you distinguish it from other related reports.</li>
+        <!--<p>Select the grade level at the time participation in the intervention began for the students whose IDs you uploaded for this analysis. To analyze additional starting grade levels, start a new study.</p>
+		<p>Note that outcomes are currently only measured in grades 3-12. If you select an intervention grade K, 1 or 2, the earliest outcome measure available will be for grade 3.</p>
+        <p>The outcome year selected may be the same as the intervention year or a later year. Most outcomes are measured at the end of the academic year. See Explanation of Terms for more information.</p>-->
+        <li>You may want to include notes for yourself about the purpose of this analysis. If you plan to run several related analyses, these notes can help clarify how this analysis differs from other related ones. For example, you might include only District A students in this analysis, running separate analyses for Districts B and C. User notes will appear at the end of the report.</li>
+        <li>When did the program, policy or intervention begin?  The comparison group will be selected on the basis of data recorded prior to the date you enter. If there was a lag between when participants were assembled and when the program began, indicate the earlier of these times. </li><!--The Evaluation Engine will not allow you to select outcomes that occur before this start date.-->
+        <li>As of the start date you entered in #3 above, what grade or grades were your students in? Select all that apply. (If you upload IDs for students who were in other grades at that time, those students will be dropped from the analysis.)</li>
+        <li>Select one or more years for outcome analysis. They may not precede the program start date. Most available outcomes are measured near the end of an academic year.</li>
+        <li>Availability of outcome measures is determined jointly by start dates (#3 above), grade levels (#4) and outcome years (#5). For example, since test measures are not available below grade 3, for an intervention with students in grade 2 you'll be able to select test measure outcomes only if you have also designated a subsequent year as an outcome year of interest.</li>
+        <!--<p>By default, members of the matched control group are selected without consideration of their school district. Users have the option instead to constrain matching so that matched intervention and control group members come from within the same school district or from across school districts. “Within district” matching might be more appropriate for studying interventions where ______. “Across district” matching might be more appropriate for studying interventions where ______</li></p>-->
+	<li>You can also request subgroup-specific impact estimates.  However, try not to get carried away, particularly if your sample is small: Because the Evaluation Engine corrects for multiple comparisons, each additional subgroup analysis you request somewhat reduces the statistical power of the others.</li></ul>
+	</div><!--end form-tips-->
+	<div class="form">
+		<h2>Step 2. Define Analysis</h2>
+		<h3>Information for This Analysis</h3>
+		<div class="question">
+			<p class="one">What would you like to call this report?</p>
+            <p><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.AnalysisName)</font></p>
+			<span class="block sub">@Html.TextBoxFor(m => m.AnalysisName, new { id = "analysisName" })</span>
+		</div>
+		<div class="question">
+			<p class="two">(Optional) Description of the analysis:</p>
+            <p><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.AnalysisDescription)</font></p>
+			<span class="block sub">@Html.TextAreaFor(m => m.AnalysisDescription, new { id = "analysisDescription" })</span>
+		</div>
+		<div class="question">
+			<p class="three">Program start date: <span class="gray sm-font">(See helpful information at right.)</span></p>
+			<span class="block sub">The same start date must apply to the entire group of students for whom you uploaded IDs for analysis.</span>
+			<div class="answer-wrap">
+				<span class="block">Program start date:
+					<span id="start-date">  
+						<select class="select" id="sday"><option value="01">1</option><option value="02">2</option><option value="03">3</option><option value="04">4</option><option value="05">5</option><option value="06">6</option><option value="07">7</option><option value="08">8</option><option value="09">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+						</select>&nbsp;
+						<select class="select" id="smonth"><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>&nbsp;
+						<select class="select" id="syear"><option>2010</option><option>2011</option><option>2012</option><option>2013</option></select>&nbsp;&nbsp;
+						@Html.TextBoxFor(m => m.InterventionStartDate, new { id = "StartDate", style = "width:150px;display:none;", @class = "dpDate" })
+					</span>
+                    <p><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.InterventionStartDate)</font></p>
+				</span>
+				<!--<span class="block">Participation end date:
+					<span id="end-date">
+						<select class="select" id="eday"><option value="01">1</option><option value="02">2</option><option value="03">3</option><option value="04">4</option><option value="05">5</option><option value="06">6</option><option value="07">7</option><option value="08">8</option><option value="09">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+						</select>&nbsp;
+						<select class="select" id="emonth"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>&nbsp;
+                        <select class="select" id="eyear"><option>2010</option><option>2011</option><option>2012</option></select>&nbsp;&nbsp
+						@Html.TextBoxFor(m => m.InterventionEndDate, new { id = "EndDate", style = "width:150px;display:none;", @class = "dpDate" })
+					</span>
+				</span>-->
+			</div>
+		</div>
+		<div class="question">
+			<p class="four">Grade level(s) at program start: <span class="gray sm-font">(See helpful information at right.)</span></p>
+			<p><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.GradeLevels)</font></p>
+            <div class="answer-wrap" id="grades">
+               <div class="col-right">
+					<!--<span class="block sub2"><input type="checkbox" id="allHS-id" class="grades hsgrades" /><label for="allHS-id">Select all</label></span>-->
+					<span class="block sub2">@if (Model.GradeLevels[9].Checked) {@Html.CheckBox("GradeLevels[9].Checked", new { id = "9-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[9].Checked", new { id = "9-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[9].Value" value="9" /><label for="9-id">9</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[10].Checked) {@Html.CheckBox("GradeLevels[10].Checked", new { id = "10-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[10].Checked", new { id = "10-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[10].Value" value="10" /><label for="10-id">10</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[11].Checked)
+                              {@Html.CheckBox("GradeLevels[11].Checked", new { id = "11-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[11].Checked", new { id = "11-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[11].Value" value="11" /><label for="11-id">11</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[12].Checked)
+                              {@Html.CheckBox("GradeLevels[12].Checked", new { id = "12-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[12].Checked", new { id = "12-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[12].Value" value="12" /><label for="12-id">12</label></span>
+				</div>
+				<div class="col-mid">
+					<span class="block sub2">@if (Model.GradeLevels[3].Checked)
+                              {@Html.CheckBox("GradeLevels[3].Checked", new { id = "3-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[3].Checked", new { id = "3-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[3].Value" value="3" /><label for="3-id">3</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[4].Checked)
+                              {@Html.CheckBox("GradeLevels[4].Checked", new { id = "4-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[4].Checked", new { id = "4-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[4].Value" value="4" /><label for="4-id">4</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[5].Checked)
+                              {@Html.CheckBox("GradeLevels[5].Checked", new { id = "5-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[5].Checked", new { id = "5-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[5].Value" value="5" /><label for="5-id">5</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[6].Checked)
+                              {@Html.CheckBox("GradeLevels[6].Checked", new { id = "6-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[6].Checked", new { id = "6-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[6].Value" value="6" /><label for="6-id">6</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[7].Checked)
+                              {@Html.CheckBox("GradeLevels[7].Checked", new { id = "7-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[7].Checked", new { id = "7-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[7].Value" value="7" /><label for="7-id">7</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[8].Checked)
+                              {@Html.CheckBox("GradeLevels[8].Checked", new { id = "8-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[8].Checked", new { id = "8-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[8].Value" value="8" /><label for="8-id">8</label></span>
+
+					<!--<span class="block sub2"><input type="checkbox" id="allMID-id" class="grades midgrades" /><label for="allMID-id">Select all</label></span>-->
+				</div>
+				<div class="col-left">
+					<!--<span class="block sub2"><input type="checkbox" id="allELE-id" class="grades eegrades" /><label for="allELE-id">Select all</label></span>-->
+					<span class="block sub2">@if (Model.GradeLevels[0].Checked)
+                              {@Html.CheckBox("GradeLevels[0].Checked", new { id = "k-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[0].Checked", new { id = "k-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[0].Value" value="K" /><label for="k-id">K</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[1].Checked)
+                              {@Html.CheckBox("GradeLevels[1].Checked", new { id = "1-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[1].Checked", new { id = "1-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[1].Value" value="1" /><label for="1-id">1</label></span>
+					<span class="block sub2">@if (Model.GradeLevels[2].Checked)
+                              {@Html.CheckBox("GradeLevels[2].Checked", new { id = "2-id", @class = "grades eegrades", @checked = true })}
+                              else
+                              {@Html.CheckBox("GradeLevels[2].Checked", new { id = "2-id", @class = "grades eegrades" })}<input type="hidden" name="GradeLevels[2].Value" value="2" /><label for="2-id">2</label></span>
+                </div>
+			</div>
+		</div>
+		<div class="question">
+			<p class="five">Outcome year(s) of interest: <span class="gray sm-font">(Check all that apply)</span></p>
+            <p><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.YearsOfInterest)</font></p>
+			<div class="answer-wrap years">
+                @Html.EditorFor(m => m.YearsOfInterest)
+			</div>
+		</div>
+		<div class="question">
+			<p class="six">Outcome measures of interest: <span class="gray sm-font">(Check all that apply)</span></p>
+            <p><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.OutcomeMeasures)</font></p>
+			<div class="answer-wrap">
+               @foreach (EvalEngine.UI.Models.UserOutcomeOption header in Model.OutcomeItems.Where(x => x.isHeader == true && x.parentId == 0))
+               {
+                    <p class="measures"><img src="@Url.Content("~/Content/inc/img/plus_icon.png")" alt="Toggle Category" /> <strong>@header.Label</strong></p>
+                    <div class="measures">
+                    @foreach (EvalEngine.UI.Models.UserOutcomeOption subcat in Model.OutcomeItems.Where(x => x.isHeader == true && x.parentId == header.Id))
+                    {
+                        <p class="measures"><img src="@Url.Content("~/Content/inc/img/plus_icon.png")" alt="Toggle Category" /> @subcat.Label</p>
+                        <div class="measures">
+                     @foreach (EvalEngine.UI.Models.UserOutcomeOption item in Model.OutcomeItems.Where(x => x.isHeader == false && x.parentId == subcat.Id))
+                     {
+                         if (item.isLabel)
+                         { 
+                            <span class="block"><em>@item.Label</em></span>
+                         }
+                         else
+                         {
+                            <span class="block">@if (@Model.OutcomeMeasures.Find(x => x.Value == item.Value && x.Checked == true) != null)
+                                                { @Html.CheckBox("OutcomeMeasures[" + outcome_number + "].Checked", new { @class = "outcome", @checked = "checked" }) }
+                                                else
+                                                { @Html.CheckBox("OutcomeMeasures[" + outcome_number + "].Checked", new { @class = "outcome" })}@this.Html.Hidden("OutcomeMeasures[" + outcome_number + "].Value", @item.Value)@this.Html.Label("OutcomeMeasures[" + outcome_number + "].Checked", @item.Label)</span>
+                                                outcome_number++;
+                         }
+                     }
+                        </div>
+                    }
+                    @foreach (EvalEngine.UI.Models.UserOutcomeOption otheritem in Model.OutcomeItems.Where(x => x.isHeader == false && x.parentId == header.Id))
+                    {
+                        if (otheritem.isLabel)
+                        { 
+                            <span class="block sub"><em>@otheritem.Label</em></span>
+                        }
+                        else
+                        {
+                            <span class="block sub">@if (@Model.OutcomeMeasures.Find(x => x.Value == otheritem.Value && x.Checked == true) != null)
+                                                    { @Html.CheckBox("OutcomeMeasures[" + outcome_number + "].Checked", new { @class = "outcome", @checked = "checked" }) }
+                                                    else
+                                                    { @Html.CheckBox("OutcomeMeasures[" + outcome_number + "].Checked", new { @class = "outcome" })}@this.Html.Hidden("OutcomeMeasures[" + outcome_number + "].Value", @otheritem.Value)@this.Html.Label("OutcomeMeasures[" + outcome_number + "].Checked", @otheritem.Label)</span>
+                                                    outcome_number++;
+                        }
+                    }
+                    </div>
+               }
+
+			</div>
+		</div>
+		<div class="question">
+			<p class="seven">Subgroup analysis: <span class="gray sm-font">(See helpful information at right.)</span></p>
+			<span class="block sub" id="subgroup_warning" style="color: rgb(255, 34, 34);">You have selected more than one subgroup analysis. To maximize the power of any one of these, uncheck the others. (See Helpful Information, at right.)</span>
+			<div class="answer-wrap">
+                @Html.EditorFor(m => m.SubgroupAnalyses)
+		    </div>
+		</div>
+        
+        <div class="question" style="display: none;">
+        <p class="eight">District Matching Preference:</p>
+        <span class="block sub">        
+            <label>@Html.RadioButtonFor(m => m.DistrictMatch, "0", new { }) No Preference (both)</label><br />
+            <label>@Html.RadioButtonFor(m => m.DistrictMatch, "1", new { }) Within District Matching</label><br />
+            <label>@Html.RadioButtonFor(m => m.DistrictMatch, "2", new { }) Across District Matching</label>
+        </span>
+        </div>
+	</div><!--end form-->
+	<div class="form-buttons">
+	    <input type="submit" value="Back" class="cancel_button" name="submitForm"/>&nbsp;&nbsp;
+        <input type="submit" value="Advanced Options" class="action_button" name="submitForm" />&nbsp;&nbsp;
+	    <input type="submit" value="Save &amp; Continue" class="action_button" name="submitForm"/>
+	</div>
+</div><!--end form-container-->
+  }
+  <script type="text/javascript">
+      if ($("#StartDate").hasClass("input-validation-error")) {
+          // $("#start-date").after("<p><font style='color:#FF2222'><span class='field-validation-error'>Start date must be after 07/01/2010.</span></font></p");
+      }
+
+      if ($("#YearsOfInterest_0__Checked").hasClass("input-validation-error")) {
+          $(".five").after("<p><font style='color:#FF2222'><span class='field-validation-error'>One or more outcome years conflict with the start date.</span></font></p");
+      }
+
+      if ($("#YearsOfInterest").hasClass("input-validation-error")) {
+          $(".five").after("<p><font style='color:#FF2222'><span class='field-validation-error'>At least one year of interest is required.</span></font></p");
+      }
+
+      $(document).ready(function () {
+          var startdate = $('#StartDate').val().split('/');
+          var startyear = startdate[2].split(' ');
+          $('select#smonth').val(startdate[0]);
+          $('select#sday').val(startdate[1]);
+          $('select#syear').val(startyear[0]);
+          //var enddate = $('#EndDate').val().split('/');
+          //var endyear = enddate[2].split(' ');
+          //$('select#emonth').val(enddate[0]);
+          //$('select#eday').val(enddate[1]);
+          //$('select#eyear').val(endyear[0]);
+
+          $('div.measures').hide();
+
+          function checkDates() {
+              var start = new Date($('#StartDate').val());
+              var datea = new Date("03/31/2011");
+              var dateb = new Date("03/31/2012");
+              var datec = new Date("03/31/2013");
+
+              if (datea <= start && start <= dateb) {
+                  $('input[value="2011-2012"]').prev().prev().removeAttr('disabled');
+                  $('input[value="2012-2013"]').prev().prev().removeAttr('disabled');
+                  $('input[value="2010-2011"]').prev().prev().attr('disabled', true);
+                  $('input[value="2010-2011"]').prev().prev().attr('checked', false);
+              }
+              else if (dateb <= start && start <= datec) {
+                  $('input[value="2010-2011"]').prev().prev().attr('disabled', true);
+                  $('input[value="2011-2012"]').prev().prev().attr('disabled', true);
+                  $('input[value="2010-2011"]').prev().prev().attr('checked', false);
+                  $('input[value="2011-2012"]').prev().prev().attr('checked', false);
+                  $('input[value="2012-2013"]').prev().prev().removeAttr('disabled');
+              }
+              else if (datec <= start) {
+                  $('input[value="2010-2011"]').prev().prev().attr('disabled', true);
+                  $('input[value="2011-2012"]').prev().prev().attr('disabled', true);
+                  $('input[value="2012-2013"]').prev().prev().attr('disabled', true);
+                  $('input[value="2010-2011"]').prev().prev().attr('checked', false);
+                  $('input[value="2011-2012"]').prev().prev().attr('checked', false);
+                  $('input[value="2012-2013"]').prev().prev().attr('checked', false);
+              }
+              else {
+                  $('input[value="2010-2011"]').prev().prev().removeAttr('disabled');
+                  $('input[value="2011-2012"]').prev().prev().removeAttr('disabled');
+                  $('input[value="2012-2013"]').prev().prev().removeAttr('disabled');
+              }
+
+              if (datea <= start && start <= dateb) {
+                  $('input[value="2012"]').prev().prev().removeAttr('disabled');
+                  $('input[value="2013"]').prev().prev().removeAttr('disabled');
+                  $('input[value="2011"]').prev().prev().attr('disabled', true);
+                  $('input[value="2011"]').prev().prev().attr('checked', false);
+              }
+              else if (dateb <= start && start <= datec) {
+                  $('input[value="2011"]').prev().prev().attr('disabled', true);
+                  $('input[value="2012"]').prev().prev().attr('disabled', true);
+                  $('input[value="2011"]').prev().prev().attr('checked', false);
+                  $('input[value="2012"]').prev().prev().attr('checked', false);
+                  $('input[value="2013"]').prev().prev().removeAttr('disabled');
+              }
+              else if (datec <= start) {
+                  $('input[value="2011"]').prev().prev().attr('disabled', true);
+                  $('input[value="2012"]').prev().prev().attr('disabled', true);
+                  $('input[value="2013"]').prev().prev().attr('disabled', true);
+                  $('input[value="2011"]').prev().prev().attr('checked', false);
+                  $('input[value="2012"]').prev().prev().attr('checked', false);
+                  $('input[value="2013"]').prev().prev().attr('checked', false);
+              }
+              else {
+                  $('input[value="2011"]').prev().prev().removeAttr('disabled');
+                  $('input[value="2012"]').prev().prev().removeAttr('disabled');
+                  $('input[value="2013"]').prev().prev().removeAttr('disabled');
+              }
+              restrict_outcomes();
+          }
+
+          checkDates();
+
+          $('#StartDate').change(function () {
+              checkDates();
+          });
+
+          $('input.grades').change(function () {
+              restrict_outcomes();
+          });
+
+          $('div.years input').change(function () {
+              restrict_outcomes();
+          });
+
+          $('p.measures').click(function () {
+              $(this).next().toggle();
+              var val = $(this).text();
+              ($(this).next().css('display') != 'none') ? $(this).children(":first").attr('src', '/Content/inc/img/minus_icon.png') : $(this).children(":first").attr('src', '/Content/inc/img/plus_icon.png');
+          });
+
+          function evaluate_outcome() {
+              var item = $(this);
+              var relatedItem = $(this).parent().parent();
+              var superItem = $(this).parent().parent().parent();
+
+              if (item.is(":checked")) {
+                  relatedItem.show();
+                  var val = relatedItem.prev().text();
+                  (relatedItem.css('display') != 'none') ? relatedItem.prev().children(":first").attr('src', '/Content/inc/img/minus_icon.png') : relatedItem.prev().children(":first").attr('src', '/Content/inc/img/plus_icon.png');
+                  if (superItem.attr("class") == "measures") {
+                      superItem.show();
+                      var val = superItem.prev().text();
+                      (superItem.css('display') != 'none') ? superItem.prev().children(":first").attr('src', '/Content/inc/img/minus_icon.png') : superItem.prev().children(":first").attr('src', '/Content/inc/img/plus_icon.png');
+                  }
+              }
+          }
+
+
+          /*
+          Call this when the intervention start date, outcome year, and grade level change. 
+          Disables (and unchecks) values which are not eligible based on above measures.
+          */
+          function restrict_outcomes() {
+
+              // get the intervention year, which is #syear, or #syear =- 1 if before april 1st.
+              var INTYEAR = $('select#syear').val();
+              if (parseInt($('select#smonth').val()) > 3) {
+                  INTYEAR = parseInt(INTYEAR) + 1;
+              }
+
+              //outcome year max is max of selected outcome years.
+              var OUTYEAR_MAX = 0;
+              $('div.years div.item input:checkbox:checked').each(function () {
+                  if ($(this).next().next().val().substr(5, 9) > OUTYEAR_MAX) {
+                      OUTYEAR_MAX = $(this).next().next().val().substr(5, 9);
+                  }
+              });
+
+              //outcome year min is min of selected outcome years.
+              var OUTYEAR_MIN = 0;
+              $('div.years div.item input:checkbox:checked').each(function () {
+                  if ($(this).next().next().val().substr(5, 9) < OUTYEAR_MIN || OUTYEAR_MIN == 0) {
+                      OUTYEAR_MIN = $(this).next().next().val().substr(5, 9);
+                  }
+              });
+
+              var GRADELEVEL_MAX = 0;
+
+              var GRADELEVEL_MIN = 12;
+              if (GRADELEVEL_MIN === 'K') {
+                  GRADELEVEL_MIN = 0;
+              }
+
+              $('input.grades:checked').each(function () {
+                  var test = $(this).next().next().val();
+
+                  if (test === "K") {
+                      test = 0;
+                  }
+                  if (test < GRADELEVEL_MIN) {
+                      GRADELEVEL_MIN = test;
+                  }
+                  if (test > GRADELEVEL_MAX) {
+                      GRADELEVEL_MAX = test;
+                  }
+              });
+
+              //alert("OUTYEAR_MAX: " + OUTYEAR_MAX + " OUTYEAR_MIN: " + OUTYEAR_MIN + " INTYEAR: " + INTYEAR + " GRADE_MIN: " + GRADELEVEL_MIN + " GRADE_MAX: " + GRADELEVEL_MAX);
+
+              // do outcome restriction here
+              if ((parseInt(GRADELEVEL_MIN) > 11 - (OUTYEAR_MIN - INTYEAR))) {
+                  $('label:contains("Promotion")').prev().prev().prev().attr('checked', false).attr('disabled', true);
+              }
+              else {
+                  $('label:contains("Promotion")').prev().prev().prev().removeAttr('disabled');
+              }
+
+              if ((parseInt(GRADELEVEL_MIN) > 11 - (OUTYEAR_MIN - INTYEAR))) {
+                  $('label:contains(Persistence)').prev().prev().prev().attr('checked', false).attr('disabled', true);
+              }
+              else {
+                  $('label:contains(Persistence)').prev().prev().prev().removeAttr('disabled');
+              }
+
+              if ((parseInt(GRADELEVEL_MIN) > 12 - (OUTYEAR_MIN - INTYEAR))) {
+                  $('label:contains(Dropout)').prev().prev().prev().attr('checked', false).attr('disabled', true);
+              }
+              else {
+                  $('label:contains(Dropout)').prev().prev().prev().removeAttr('disabled');
+              }
+
+              if ((parseInt(GRADELEVEL_MIN) > 12 - (OUTYEAR_MIN - INTYEAR))) {
+                  $('label:contains(Attendance)').prev().prev().prev().attr('checked', false).attr('disabled', true);
+              }
+              else {
+                  $('label:contains(Attendance)').prev().prev().prev().removeAttr('disabled');
+              }
+
+              if ((parseInt(GRADELEVEL_MAX) < 12 - (OUTYEAR_MIN - INTYEAR))) {
+                  $('label:contains(Graduation)').prev().prev().prev().attr('checked', false).attr('disabled', true);
+              }
+              else {
+                  $('label:contains(Graduation)').prev().prev().prev().removeAttr('disabled');
+              }
+
+              // Tennessee specific suppression rules
+
+              if ((3 - (OUTYEAR_MAX - INTYEAR)) > parseInt(GRADELEVEL_MAX) || parseInt(GRADELEVEL_MIN) > (8 - (OUTYEAR_MIN - INTYEAR))) {
+                  $('label:contains(TCAP)').prev().prev().prev().attr('checked', false).attr('disabled', true);
+              }
+              else {
+                  $('label:contains(TCAP)').prev().prev().prev().removeAttr('disabled');
+              }
+
+              if ((9 - (OUTYEAR_MAX - INTYEAR)) > parseInt(GRADELEVEL_MAX) || parseInt(GRADELEVEL_MIN) > (10 + (INTYEAR - 2011))) {
+                  $('label:contains(English II)').prev().prev().prev().attr('checked', false).attr('disabled', true);
+              }
+              else {
+                  $('label:contains(English II)').prev().prev().prev().removeAttr('disabled');
+              }
+
+              if ((7 - (OUTYEAR_MAX - INTYEAR)) > parseInt(GRADELEVEL_MAX) || parseInt(GRADELEVEL_MIN) > (8 + (INTYEAR - 2011))) {
+                  $('label:contains(Algebra I)').prev().prev().prev().attr('checked', false).attr('disabled', true);
+              }
+              else {
+                  $('label:contains(Algebra I)').prev().prev().prev().removeAttr('disabled');
+              }
+          }
+
+          $('input[type="checkbox"].outcome').click(evaluate_outcome).each(evaluate_outcome);
+
+          $('#allELE-id').click(function () {
+              $('.eegrades').attr('checked', this.checked);
+          });
+
+          $('#allMID-id').click(function () {
+              $('.midgrades').attr('checked', this.checked);
+          });
+
+          $('#allHS-id').click(function () {
+              $('.hsgrades').attr('checked', this.checked);
+          });
+
+          $('input.subgroup').click(function () {
+              var $checked = $('input[type=checkbox].subgroup');
+              if ($checked.filter(':checked').length > 1) {
+                  $('#subgroup_warning').show();
+              }
+              else {
+                  $('#subgroup_warning').hide();
+              }
+          });
+
+          if ($('input[type=checkbox].subgroup').filter(':checked').length > 1) {
+              $('#subgroup_warning').show();
+          }
+          else {
+              $('#subgroup_warning').hide();
+          }
+
+          $("#StartDate").datepicker({
+              yearRange: "2010:2013",
+              showOn: "button",
+              buttonImage: "/Content/inc/img/icon_calendar.png",
+              buttonImageOnly: true,
+              changeMonth: true,
+              changeYear: true,
+              onSelect: function (dateText, inst) {
+                  //dateText comes in as MM/DD/YY
+                  var datePieces = dateText.split('/');
+                  var month = datePieces[0];
+                  var day = datePieces[1];
+                  var year = datePieces[2];
+                  //define select option values for
+                  //corresponding element
+                  $('select#smonth').val(month);
+                  $('select#sday').val(day);
+                  $('select#syear').val(year);
+
+                  checkDates();
+              }
+          });
+          /*$("#EndDate").datepicker({
+          yearRange: "-20:+0",
+          showOn: "button",
+          buttonImage: "/Content/inc/img/icon_calendar.png",
+          buttonImageOnly: true,
+          changeMonth: true,
+          changeYear: true,
+          onSelect: function (dateText, inst) {
+          //dateText comes in as MM/DD/YY
+          var datePieces = dateText.split('/');
+          var month = datePieces[0];
+          var day = datePieces[1];
+          var year = datePieces[2];
+          //define select option values for
+          //corresponding element
+          $('select#emonth').val(month);
+          $('select#eday').val(day);
+          $('select#eyear').val(year);
+          }
+          });*/
+
+          $('#smonth,#sday,#syear').change(function () {
+              $('#StartDate').datepicker('setDate',
+				new Date($('#syear').val() - 0, $('#smonth').val() - 1, $('#sday').val() - 0));
+              checkDates();
+          });
+
+          /*$('#emonth,#eday,#eyear').change(function () {
+          $('#EndDate').datepicker('setDate',
+          new Date($('#eyear').val() - 0, $('#emonth').val() - 1, $('#eday').val() - 0));
+          });*/
+
+          $('#smonth').change();
+
+         if (!@Model.InterventionStartDate.CompareTo(new DateTime(1753, 1, 1))) {
+             $('select#smonth').val('08');
+            $('#StartDate').datepicker('setDate',
+				new Date($('#syear').val() - 0, 8, $('#sday').val() - 0));
+              checkDates(); 
+         }
+          //$('#emonth').change();
+
+          /*$('form').validate({
+          errorPlacement: $.datepicker.errorPlacement,
+          rules: {
+          StartDate: {
+          required: true,
+          dpDate: true,
+          dpCompareDate: 'notBefore 05/31/2010'
+          }
+          },
+          messages: {
+          StartDate: 'Please enter a valid date (yyyy-mm-dd)'
+          }
+          });*/
+
+          $('form').validate({
+              rules: {
+                  InterventionEndDate: {
+                      required: true,
+                      dpDate: true,
+                      dpCompareDate: 'notBefore 05/31/2010'
+                  }
+              }
+          });
+
+
+      });
+
+  </script>
+  <style type="text/css">
+	  img.ui-datepicker-trigger {
+		font-size: 65% !important;
+		vertical-align: middle !important;
+		margin-left: 5px !important;
+	}
+  </style>

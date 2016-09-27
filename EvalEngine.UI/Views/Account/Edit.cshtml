@@ -1,0 +1,171 @@
+﻿@model EvalEngine.UI.Models.UserEditModel
+
+@{
+	ViewBag.Title = "Edit Account";
+}
+
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()  
+      <style>
+      .float a:hover { color:Black; }
+      .float a:link { color:Black; }
+      .float a:visited { color:Black; }
+      .float a:active { color:Black; }      
+      </style>
+    	<div class="content_header">
+        	<h4><span class="float"><a href="@this.Url.Action("Users", "Account")">< Back to all accounts</a></span>Manage Accounts</h4>
+        </div><!--end content_header-->
+    	<div class="content">
+            <div class="tab-wrapper">
+            	<div class="tab up"><a href="@this.Url.Action("MyAccount", "Account")">My Account</a></div>
+                <div class="tab up"><a href="@this.Url.Action("Add", "Account")">Create New Account</a></div>
+                <div class="tab down"><a href="@this.Url.Action("Users", "Account")">Manage Accounts</a></div>
+            </div><!--end tab-wrapper-->
+            <p class="directions">Update account information below. Required fields are marked *.</p>
+            <div class="table-wrapper">
+            	<table class="table acct-info">
+                	<tr>
+                    	<td width="50%" class="info-left">
+                        	<table>
+                            	<tr>
+                                	<td scope="row" width="50%">First Name: *</td>
+                                    <td width="50%"> @this.Html.TextBoxFor(m => m.FirstName, new { tabindex = 1 })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.FirstName)</td>
+                                </tr>
+                                <tr>
+                                	<td scope="row">Last Name: *</td>
+                                    <td> @this.Html.TextBoxFor(m => m.LastName, new { tabindex = 2 })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.LastName)</td>
+                                </tr>
+                                <tr>
+                                	<td scope="row">Email: *</td>
+                                    <td> @this.Html.TextBoxFor(m => m.Email, new { tabindex = 3, disabled = "disabled" })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                	<td scope="row">Organization: *</td>
+                                    <td> @this.Html.TextBoxFor(m => m.Organization, new { tabindex = 4 })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.Organization)</td>
+                                </tr>
+                                <tr>
+                                	<td scope="row">Title:</td>
+                                    <td> @this.Html.TextBoxFor(m => m.Title, new { tabindex = 5 })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="50%" class="info-right">
+                        	<table>
+                            	<tr>
+                                	<td>User Type: *</td>
+                                </tr>
+                                 @if (!HttpContext.Current.User.IsInRole(EvalEngine.Domain.Entities.Constants.StateAdminRole))
+                                 { 
+                                <tr>
+                                	<td>
+                                    	<div class="box">
+                                        	Project Staff
+                                 @if (!HttpContext.Current.User.IsInRole(EvalEngine.Domain.Entities.Constants.MultipleStateUserRole))
+                                 { 
+                                            <span class="block">@this.Html.RadioButtonFor(m => m.AccountType, "Project Administrator")&nbsp;&nbsp;Project Administrator</span>
+                                            <span class="block">@this.Html.RadioButtonFor(m => m.AccountType, "Project User")&nbsp;&nbsp;Project User</span>
+                                 }
+                                            <span class="block">@this.Html.RadioButtonFor(m => m.AccountType, "Multiple State User")&nbsp;&nbsp;"Multiple State" User
+                                            	 <span id="cbStates">
+                                                 @Html.EditorFor(m => m.CheckboxStateSelections)
+                                                 </span>
+                                            </span>
+                                   		</div><!--end box-->
+                                    </td>
+                                </tr>}
+                                <tr>
+                                	<td>
+                                    	<div class="box">
+                                        	State Staff
+                                            <span class="block">@this.Html.RadioButtonFor(m => m.AccountType, "State Administrator")&nbsp;&nbsp;State Administrator</span>
+                                            <span class="block">@this.Html.RadioButtonFor(m => m.AccountType, "State User")&nbsp;&nbsp;State User
+                                                <span  id="radioStates">@foreach (var item in Model.RadioStateSelections)
+                                                {
+                                                        <span class="block">
+                                                        <!--@this.Html.Hidden("RadioSelectedState", item.StateId)-->
+                                                        @this.Html.RadioButtonFor(x => x.RadioSelectedState, item.StateId)
+                                                        @this.Html.LabelFor(x => x.RadioSelectedState, item.StateName)
+                                                        </span>
+                                                }
+                                                </span>
+                                            </span>
+                                   		</div><!--end box-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.AccountType)</td>
+                                </tr>
+                                <tr>
+                                	<td>Status: *
+                                    	<span class="block">@this.Html.RadioButtonFor(m => m.IsActive, true)&nbsp;&nbsp;Active</span>
+                                        <span class="block">@this.Html.RadioButtonFor(m => m.IsActive, false)&nbsp;&nbsp;Deactivated</span>
+                                    </td>
+                                </tr>
+                                @if (Roles.IsUserInRole("Site Administrator"))
+                                {
+                                <tr>
+                                	<td>Status: *
+                                    	<span class="block">@this.Html.RadioButtonFor(m => m.IsLocked, true, new {disabled = "disabled" })&nbsp;&nbsp;Locked</span>
+                                        <span class="block">@this.Html.RadioButtonFor(m => m.IsLocked, false)&nbsp;&nbsp;Unlocked</span>
+                                    </td>
+                                </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div><!--end table-wrapper-->
+            <div class="buttons">
+            	<ul>
+                	<li><input value="Save Changes" type="submit" class="action_button" /></li>
+                    <li><a href="@this.Url.Action("Users", "Account")"><input type="button" value="Cancel" class="cancel_button" /></a></li>
+                </ul>
+            </div>   
+        </div><!--end content-->
+  }         
+  <script type="text/javascript">
+      $(document).ready(function () {
+          if ("@Model.AccountType.ToString()" == "State Administrator" || "@Model.AccountType.ToString()" == "State User") {
+              $('#cbStates').hide();
+              $('#radioStates').show();
+          }
+          else if ("@Model.AccountType.ToString()" == "Project Administrator" || "@Model.AccountType.ToString()" == "Project User") {
+              $('#radioStates').hide();
+              $('#cbStates').hide();
+          }
+          else {
+              $('#radioStates').hide();
+              $('#cbStates').show();
+          }
+          $('input[name="AccountType"]').click(function () {
+              if ($(this).val() == "State Administrator" || $(this).val() == "State User") {
+                  $('#cbStates').hide();
+                  $('#radioStates').show();
+              }
+              else if ($(this).val() == "Project Administrator" || $(this).val() == "Project User") {
+                  $('#radioStates').hide();
+                  $('#cbStates').hide();
+              }
+              else {
+                  $('#radioStates').hide();
+                  $('#cbStates').show();
+              }
+          });
+      });
+</script>

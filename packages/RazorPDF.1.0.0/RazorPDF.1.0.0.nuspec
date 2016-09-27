@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>RazorPDF</id>
+    <version>1.0.0</version>
+    <title>RazorPDF for MVC - Generate PDFs with Razor Views and iTextSharp</title>
+    <authors>Al Nyveldt</authors>
+    <owners>Al Nyveldt</owners>
+    <projectUrl>http://nyveldt.com/blog/page/razorpdf</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>RazorPDF uses the Razor View Engine to create iTextXML which in turn is used to produce the PDF files. RazorPDF is basically a port of the PDF feature of Spark View Engine.</description>
+    <dependencies>
+      <dependency id="iTextSharp" version="4.1.2" />
+    </dependencies>
+    <references>
+      <reference file="RazorPDF.dll" />
+    </references>
+  </metadata>
+</package>

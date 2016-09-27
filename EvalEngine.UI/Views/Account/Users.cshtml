@@ -1,0 +1,150 @@
+﻿@model IEnumerable<EvalEngine.UI.Models.UserViewModel>
+
+@{
+	ViewBag.Title = "Manage Accounts";
+}
+
+    	<div class="content_header">
+        	<h4>Manage Accounts</h4>
+        </div><!--end content_header-->
+    	<div class="content">
+            @if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|SUCCESS")))
+            {
+                <div class="box confirmation" style="width:938px;"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|SUCCESS"))</div>
+            }
+            else if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|FAILURE")))
+            {
+                <div class="box error" style="width:938px"><img src="@Url.Content("~/Content/inc/img/icon_error.png")" alt="Failure icon" width="15" height="11" />&nbsp;@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|FAILURE"))</div>
+            }
+            else if (TempData["message"] != null)
+            {
+                <div class="box confirmation" style="width:938px;"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;@TempData["message"]</div>   
+            }
+            
+            <div class="tab-wrapper" style="margin-top:10px;">
+            	<div class="tab up"><a href="@this.Url.Action("MyAccount", "Account")">My Account</a></div>
+                <div class="tab up"><a href="@this.Url.Action("Add", "Account")">Create New Account</a></div>
+                <div class="tab down"><a href="@this.Url.Action("Users", "Account")">Manage Accounts</a></div>
+            </div><!--end tab-wrapper-->
+            
+            <p class="directions">Click on the accounts below to view and update information.</p>
+            <div class="table-wrapper" style="margin-top:20px;">
+            <table class="table table-striped tablesorter" id="date-accts">
+                <thead>
+                    <tr>
+                        <th class="state">
+                            <span class="inline-link" ><i id="state" class="icon-chevron-down icon-white" ></i>
+                            </span>States
+                        </th>
+                        <th class="fname">
+                            <span class="inline-link" ><i id="fnamei" class="icon-chevron-down icon-white" ></i>
+                            </span>First Name
+                        </th>
+                        <th class="lname">
+                            <span class="inline-link" ><i id = "lnamei" class="icon-chevron-down icon-white"></i>
+                            </span>Last Name
+                        </th>
+                        <th class="email">
+                            <span class="inline-link" ><i id="emaili" class="icon-chevron-down icon-white"></i>
+                            </span>Email
+                        </th>
+                        <th class="organization">
+                            <span class="inline-link" ><i id="orgi" class="icon-chevron-down icon-white"></i>
+                            </span>Organization
+                        </th>
+                        <th class="role">
+                            <span class="inline-link" ><a href="#"><i id="rolei" class="icon-chevron-down icon-white"></i></a>
+                            </span>User Type
+                        </th>
+                        <th class="edit-icons">
+                        </th>
+                            @if (Roles.IsUserInRole("Site Administrator"))
+                            {
+                                <th class="edit-icons">
+                                    <span class="inline-link" ><a href="#"></a>
+                                    </span>
+                                </th>
+                                <th class="edit-icons">
+                                    <span class="inline-link" ><a href="#"></a>
+                                    </span>
+                                </th>                                
+                            }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in this.Model)
+                    {
+                        <tr>
+                            <td>@this.Html.DisplayFor(modelItem => item.UserStatesCsv)</td>
+                            <td>@this.Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>@this.Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>@this.Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>@this.Html.DisplayFor(modelItem => item.Organization)
+                            </td>
+                            <td>@this.Html.DisplayFor(modelItem => item.UserRolesCsv)
+                            </td>
+                            <td>
+                                <a href="@this.Url.Action("Edit", "Account", new { userName = item.UserName })">View/Edit</a>
+                            </td>
+                            @if (Roles.IsUserInRole("Site Administrator"))
+                            {
+                                <td class="right">
+                                    @using (Html.BeginForm("Delete", "Account", FormMethod.Post, new { @class = "blank" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <a href="@this.Url.Action("Delete", "Account", new { userName = item.UserName })">Delete</a>  
+                                    }
+                                </td>
+                                <td class="right">
+                                    @using (Html.BeginForm("ResendVerify", "Account", FormMethod.Post, new { @class = "blank" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <a href="@this.Url.Action("ResendVerify", "Account", new { userName = item.UserName })">New Verify</a>  
+                                    }
+                                </td>                                
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div><!--end table-wrapper-->
+        </div><!--end content-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#date-accts").tablesorter({
+            cssAsc: 'headerSortUp',
+            cssDesc: 'headerSortDown',
+            cssHeader: 'headerUnSort',
+            sortList: [[1, 0]]
+        });
+    }
+    );
+    $(document).ready(function () {
+        $('#search').keyup(function () {
+            searchTable($(this).val());
+        });
+    });
+
+    function searchTable(inputVal) {
+        var table = $('#date-accts');
+        table.find('tr').each(function (index, row) {
+            var allCells = $(row).find('td');
+            if (allCells.length > 0) {
+                var found = false;
+                allCells.each(function (index, td) {
+                    var regExp = new RegExp(inputVal, 'i');
+                    if (regExp.test($(td).text())) {
+                        found = true;
+                        return false;
+                    }
+                });
+                if (found == true) $(row).show();
+                else $(row).hide();
+            }
+        });
+    }
+</script>

@@ -1,0 +1,40 @@
+﻿@model EvalEngine.UI.Models.HelpModel
+ @using EvalEngine.Domain.Entities
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()  
+    	<div class="content_header"><h4>Help</h4></div>
+    	<div class="help-content">
+        	<div class="form-tips">
+        		<p>Need help using Evaluation Engine or have questions about how it works?</p>
+                <p><span style="color:gray;">Frequently Asked Questions <span class="sm-font">(PDF)</span></span></p>
+    		</div><!--end form-tips-->
+    		<div class="form">
+            	<div class="help-bg"><img src="@Url.Content("~/Content/inc/img/clear.png")" alt="Help" width="1" height="1" /></div><br />
+                <p class="med-font">To send a help request, select a category that best fits your issue, and enter a subject and description in the form below.</p>
+                <table class="table help">
+                    <tr>
+                        <td class="category" scope="row">Select category:&nbsp;&nbsp;
+                        	 @Html.DropDownList("Category", ViewData["list"] as SelectList)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Subject: &nbsp;@this.Html.ValidationMessageFor(m => m.Category)</td>
+                    </tr>
+                    <tr>
+                        <td>@this.Html.TextBoxFor(m => m.Subject, new { tabindex = 2, @class = "helpSubject" })</td><td class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.Subject)</td>
+                    </tr>
+                    <tr>
+                        <td>Description: &nbsp;@this.Html.ValidationMessageFor(m => m.Description)</td>
+                    </tr>
+                    <tr>
+                        <td>@this.Html.TextAreaFor(m => m.Description, new { tabindex = 3, @class = "helpDescription" })</td>
+                    </tr>
+                </table>
+            </div><!--end form-->
+            <div class="form-buttons">
+                <input type="button" value="Clear Form" class="cancel_button" />&nbsp;&nbsp;
+                <input type="submit" value="Submit Request" class="action_button" />
+            </div>
+        </div><!--end content-->
+  }

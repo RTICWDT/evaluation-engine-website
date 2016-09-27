@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Evaluation Engine Report - Subgroup Analysis Tables";
+}
+@model EvalEngine.UI.Models.Step4Model
+@using Svg;
+@using System.Text;
+@using EvalEngine.UI.Helpers;
+
+<style>
+
+</style>
+
+<div class="form-container">
+	<div class="form-step step-4"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="View Results" /></div>
+	<div class="form-tips-narrow">
+		<div style="">
+		    <div class="report-section-wrapper">
+			    <span class="dropdown">
+				    <h1>Report Sections</h1>
+					    <ul>
+						    <li><a href="@Url.Action("Step4", "Analysis", new { id = ViewBag.ID })">Overall Results</a></li>
+                            <li><a class="selected" href="@Url.Action("Step4a", "Analysis", new { id = ViewBag.ID })">Subgroup Analysis</a></li>
+						    <li><a href="@Url.Action("Step4b", "Analysis", new { id = ViewBag.ID })">Data and Statistical Methods</a></li>
+						    <li><a href="@Url.Action("Step4c", "Analysis", new { id = ViewBag.ID })">User Descriptions</a> </li>
+					    </ul>
+			    </span>
+                <br />
+                <a href="@Url.Action("Step4Rota", "Analysis", new { id = ViewBag.ID })"><img src="@Url.Content("~/Content/inc/img/pdficon_small.png")" /> Download Report</a></div>
+		</div>
+        <br />
+</div>
+
+	
+	<div class="form-output">
+		<h1>Subgroup Analysis</h1>
+		 
+		@foreach (EvalEngine.UI.Models.ReportTable table in Model.Report.TableCollection)
+  {   
+      if (!table.HTML.Contains("There was an error parsing the YAML for this subgroup analysis"))
+      {
+      <div class="table-container">
+		 <p style="border-bottom:#D4DADE 1px solid; margin-bottom:10px;padding-bottom:10px;padding-top:10px;font-weight:600;">OUTCOME: @table.Title</p>
+         <p style="padding-bottom: 5px; color: #F2790C; font-weight: 600;">@table.Subtitle</p>
+         @Html.Raw(table.HTML)
+		 
+		 @Html.Raw(table.Footer)
+
+         <p style="padding-top:7px;"><span class="sm-font">Notes: @table.SubgroupNote</span></p>
+		  <br /><br />
+          </div>
+      }
+  }
+  @if (Model.Report.Subgroups == "" || Model.Report.Subgroups == null)
+  {
+    <p>No subgroup variable was selected for this report.</p>
+  }
+		 
+	</div><!--end form-->
+</div><!--end form-container-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.table-note-container').each(function () {
+            var index = $(this).index($('.table-note-container'));
+            $(this).css("height", $('.table-container').eq(index).height());
+        });
+        $('.chart-note-container').each(function () {
+            var index = $(this).index($('.chart-note-container'));
+            $(this).css("height", $('.chart-container').eq(index).height());
+        });
+    });
+</script>

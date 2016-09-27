@@ -1,0 +1,199 @@
+﻿@model EvalEngine.UI.Models.ReportChart
+@using Svg;
+@using System.Text;
+@using EvalEngine.UI.Helpers;
+@using Remotion.Data.Linq.Clauses
+
+@if (Model.ChartData_PerGrade != "Input string was not in a correct format.") {
+    <script type="text/javascript">
+        var chartName = "#chart" + "@Model.Rank.ToString()" + "@Model.Type";
+        var colors = ["#22aa22","#e8750c","#325d87"];
+        var svg = dimple.newSvg(chartName, 610, 380);
+        var data = @Html.Raw(@Model.ChartData_PerGrade);
+        //alert(JSON.stringify(data));
+        var stackedChart = new dimple.chart(svg, data);
+        stackedChart.setBounds(65, 55, 425, 225);
+
+        var x = stackedChart.addCategoryAxis("x", ["Label", "SD"]);
+        var y = stackedChart.addPctAxis("y", "Value");
+        var s = stackedChart.addSeries(["Rank", "Value", "Type"], dimple.plot.bar);
+
+        stackedChart.addColorAxis("Value", ["#FF0000", "#00FF00", "#0000FF"]);
+        stackedChart.defaultColors = [
+            new dimple.color("#22aa22"),
+            new dimple.color("#e8750c"),
+            new dimple.color("#325d87")
+        ];
+        s.afterDraw = function(shape, data) {
+            // Get the shape as a d3 selection
+            var s = d3.select(shape),
+                rect = {
+                    x: parseFloat(s.attr("x")),
+                    y: parseFloat(s.attr("y")),
+                    width: parseFloat(s.attr("width")),
+                    height: parseFloat(s.attr("height"))
+                };
+            // Only label bars where the text can fit
+
+        };
+
+        s.getTooltipText = function (e) {
+           // alert(JSON.stringify(e));
+            return [
+                e.xField[1],
+                e.xField[0],
+                e.aggField[2],
+                e.aggField[1]
+            ];
+        };
+
+        x.addOrderRule(["Overall", "1st grade", "2nd grade", "3rd grade", "4th grade", "5th grade", "6th grade", "7th grade", "8th grade", "9th grade", "10th grade", "11th grade", "12th grade"]);
+        s.addOrderRule("Rank", false);
+        //y.addOrderRule("Rank");
+        s.barGap = .5;
+        y.showGridlines = false;
+
+        // Handle the hover event - overriding the default behaviour
+        //s.addEventHandler("mouseover", onHover);
+        // Handle the leave event - overriding the default behaviour
+        //s.addEventHandler("mouseleave", onLeave);
+
+        var legend = stackedChart.addLegend(65, 320, 300, 400, "left", s);
+
+        legend._getEntries = function() {
+            var entries = [];
+            if (this.series) {
+                this.series.forEach(function(series) {
+                    var data = series._positionData;
+                    data.forEach(function(row) {
+                        var index = -1,
+                            j,
+                            field = ((series.plot.grouped && !series.x._hasCategories() && !series.y._hasCategories() && row.aggField.length < 2 ? "All" : row.aggField.slice(-1)[0]));
+                        for (j = 0; j < entries.length; j += 1) {
+                            if (entries[j].key === field) {
+                                index = j;
+                                break;
+                            }
+                        }
+                        if (index === -1 && series.chart._assignedColors[field]) {
+                            entries.push({
+                                key: field,
+                                fill: series.chart._assignedColors[field].fill,
+                                stroke: series.chart._assignedColors[field].stroke,
+                                opacity: series.chart._assignedColors[field].opacity,
+                                series: series,
+                                aggField: row.aggField
+                            });
+                            index = entries.length - 1;
+                        }
+                    });
+                }, this);
+            }
+
+            entries.reverse();
+
+            return entries;
+        };
+
+        stackedChart.draw();
+
+        
+
+        legend.shapes.selectAll('g').each(function(legend) {
+            //console.log(legend.parent().attr('class'));
+            //console.log('1');
+        });
+
+        $('g.dimple-legend').each(function(item) {
+            //$(this).insertAfter($('g.dimple-legend').last());
+        });
+
+        x.titleShape.remove();
+        y.titleShape.remove();
+
+        //$('rect.dimple-legend').attr('style', "stroke: rgb(211, 150, 81); opacity: 0.8; shape-rendering: crispedges;");
+        s.shapes.each(function(d) {
+
+            // Get the shape as a d3 selection
+            var shape = d3.select(this);
+            //console.log(JSON.stringify(d));
+            // Get the height and width from the scales
+            var height = stackedChart.y + stackedChart.height - y._scale(d.height);
+            var width = parseFloat(shape.attr("width"));
+
+            var posx = parseFloat(shape.attr("x")) + width / 2;
+            var posy = parseFloat(shape.attr("y")) + (1.2 * (width / 3));
+            var textcolor = "white";
+
+            var textvalue = d.yValue;
+            if ("@Model.Type" === "pp" || "@Model.Format" === "percent") {
+                textvalue = d.yValue + "%";
+
+            } else {
+                textvalue = d.yValue + "%";
+            }
+            if (height < 55) {
+                //posy = parseFloat(shape.attr("y")) - height - (2 * (width / 3)) + 15;
+                var position = legend.shapes[0].length - 1 - d.aggField[0];
+                textcolor = colors[position];
+                textcolor = "#000000";
+                posy = (d.aggField[0] * 14) + stackedChart.y - 35;
+                textvalue = "";
+            }
+
+            /*if (shape.attr('style')) {
+                                  shape.attr('style').replace(/fill:[^;]+/g, '');
+                              }
+
+
+                              shape.attr("fill", colors[d.aggField[0]]);
+
+                              $('rect.dimple-legend.dimple-' + d.aggField[0]).attr('fill', colors[d.aggField[0]]);*/
+
+            //if(height > 8) {
+            // Add a text label for the value
+            svg.append("text")
+
+                // Position in the centre of the shape (vertical position is
+                // manually set due to cross-browser problems with baseline)
+                .attr("x", posx)
+                .attr("y", posy)
+                //.attr("y", parseFloat(shape.attr("y")) - height / 2)
+
+                // Centre align
+                .style("text-anchor", "middle")
+                .style("font-size", "11px")
+                .style("font-family", "\"Gill Sans\", \"Gill Sans MT\", Calibri, sans-serif;")
+                .style("fill", textcolor)
+                // Format the number
+                .text(textvalue);
+
+            if (d.aggField[0] === 0) {
+                svg.append("text")
+
+                    // Position in the centre of the shape (vertical position is
+                    // manually set due to cross-browser problems with baseline)
+                    .attr("x", posx)
+                    .attr("y", 310.625)
+                    //.attr("y", parseFloat(shape.attr("y")) - height / 2)
+
+                    // Centre align
+                    .style("text-anchor", "middle")
+                    .style("font-size", "11px")
+                    .style("font-family", "\"Gill Sans\", \"Gill Sans MT\", Calibri, sans-serif;")
+                    .style("fill", "black")
+
+
+                    // Format the number
+                    .text(d.xField[1]);
+
+            }
+
+        });
+    </script>
+}
+else
+{
+    <p>There was an error generating this chart.</p>
+    <p>@Html.Raw(Model.ErrorMessage)</p>
+}

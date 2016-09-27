@@ -1,0 +1,117 @@
+﻿@model EvalEngine.UI.Models.ReportChart
+
+                      <script type="text/javascript">
+                          var chartName = "#chart" + "@Model.Rank" + "@Model.Type";
+                          var svg = dimple.newSvg(chartName, 600, 300);
+                          var data = @Html.Raw(@Model.ChartData_PerGrade);
+                          var chart = new dimple.chart(svg, data);
+                          chart.setBounds(65, 45, 425, 215);
+
+                          var x = chart.addCategoryAxis("x", ["Label", "Type"]);
+                          //var x2 = chart.addCategoryAxis("x", "Type");
+                          var y = chart.addMeasureAxis("y", "Value");
+                          //var z = chart.addCategoryAxis("z", "SD");
+                          var s = chart.addSeries(["Value", "SD", "Type"], dimple.plot.bar);
+                          //var s2 = chart.addSeries("Type", dimple.plot.bar);
+                          // chart.addSeries(["Volume", "Year"], dimple.plot.bar);
+                          y.hidden = true;
+                          //x.showGridlines = false;
+                          //s.addOrderRule(["Value", "SD", "Type"], true);
+                          x.addOrderRule("Label", false);
+                          x.addGroupOrderRule(["Treatment", "Control"]);
+                          s.addOrderRule("Type", true);
+                          s.barGap = .5;
+
+
+                          // Handle the hover event - overriding the default behaviour
+                          s.addEventHandler("mouseover", onHover);
+                          // Handle the leave event - overriding the default behaviour
+                          s.addEventHandler("mouseleave", onLeave);
+
+                          chart.addLegend(500, 100, 100, 100, "right", s);
+
+                          chart.assignColor("Control", "#325D87");
+                          chart.assignColor("Treatment", "#E8750C");
+                          chart.draw();
+                          //x2.position.top = x.position.top + 50;
+                          //chart.axes[1].shapes.attr('transform', "translate(0, 290)");
+                          // chart.series[1].shapes.remove();
+                          x.titleShape.remove();
+                          //x2.titleShape.remove();
+
+                          //x.shapes.selectAll("text").attr('style', 'font-size:13px;font-family: "Gill Sans MT", Calibri, sans-serif;color:#555;').attr('fill', '#555');
+                          s.shapes.each(function(d) {
+
+                              // Get the shape as a d3 selection
+                              var shape = d3.select(this);
+                              // Get the height and width from the scales
+                              var height = chart.y + chart.height - y._scale(d.height);
+                              var width = parseFloat(shape.attr("width"));
+
+                              var posx = parseFloat(shape.attr("x")) + width / 2;
+                              var posy = parseFloat(shape.attr("y")) + (1.2 * (width / 3));
+                              var textcolor = "white";
+                              if (height < 55) {
+                                  posy = parseFloat(shape.attr("y")) - height - (2 * (width / 3));
+                                  textcolor = "black";
+
+                              }
+
+                              var textvalue = d.yValue;
+                              if ("@Model.Type" === "pp" || "@Model.Format" === "percent") {
+                                  textvalue = d.yValue + "%";
+
+                              } else {
+                                  textvalue = d.yValue;
+                              }
+
+                              // Add a text label for the value
+                              svg.append("text")
+
+                                  // Position in the centre of the shape (vertical position is
+                                  // manually set due to cross-browser problems with baseline)
+                                  .attr("x", posx)
+                                  .attr("y", posy)
+                                  //.attr("y", parseFloat(shape.attr("y")) - height / 2)
+
+                                  // Centre align
+                                  .style("text-anchor", "middle")
+                                  .style("font-size", width / 3 + "px")
+                                  .style("font-family", "\"Gill Sans\", \"Gill Sans MT\", Calibri, sans-serif;")
+                                  .style("fill", textcolor)
+
+                                  // Format the number
+                                  .text(textvalue);
+                              if (d.aggField[1] !== '-') {
+                                  svg.append("text")
+                                      .attr("x", posx)
+                                      .attr("y", posy + width / 2)
+                                      .style("text-anchor", "middle")
+                                      .style("font-size", width / 3 + "px")
+                                      .style("font-family", "\"Gill Sans\", \"Gill Sans MT\", Calibri, sans-serif;")
+                                      .style("fill", textcolor)
+                                      //.text('(0.23)');
+                                      .text('(' + (d.aggField[1]/100).toFixed(1) + ')');
+                              }
+
+                              svg.selectAll("title_text")
+                                  .data(["Standard deviations", "are in parentheses"])
+                                  .enter()
+                                  .append("text")
+                                  .attr("x", 499)
+                                  .attr("y", function(d, i) { return 150 + i * 14; })
+                                  .style("font-family", "\"Gill Sans\", \"Gill Sans MT\", Calibri, sans-serif;")
+                                  .style("fill", "#555")
+                                  .style("font-size", "10px")
+                                  .text(function(d) { return d; });
+                          });
+
+                          // Event to handle mouse enter
+                          function onHover(e) {
+
+                          };
+
+                          // Event to handle mouse exit
+                          function onLeave(e) {
+                          };
+                      </script>

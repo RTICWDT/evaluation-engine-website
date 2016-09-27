@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+@model EvalEngine.UI.Models.IndexModel
+<link href="@Url.Content("~/Content/inc/files/overview/overview_embed.css")" rel="stylesheet" type="text/css">
+<div class="secondary-content">
+        	<div class="video"><div style="color:#999;text-align:center;padding-top:0px;"><iframe class="tscplayer_inline" name="tsc_player" src="@Url.Content("~/Content/inc/files/overview/overview_player.html")" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div></div>
+            <h5>Resources</h5>
+            <span class="block align" style="color:gray;"><img src="@Url.Content("~/Content/inc/img/icon_download.png")" />Create a New Study <span class="sm-font">(PDF)</span></span>
+            <span class="block align" style="color:gray;"><img src="@Url.Content("~/Content/inc/img/icon_download.png")" />Explanation of Terms <span class="sm-font">(PDF)</span></span>
+            <span class="block align" style="color:gray;"><img src="@Url.Content("~/Content/inc/img/icon_download.png")" />Frequently Asked Questions <span class="sm-font">(PDF)</span></span>
+        </div>
+        <div class="main-content">
+        	<div class="content-right">
+                <h1>Create New Study</h1>
+            	<p>Begin a new query. You will be required to upload IDs for your intervention group. Format and other information are provided below. Questions? See Create a New Study.</p>
+            	<p><a href="@Url.Content("~/Content/inc/files/EE ID Submission Template.xlsx")">ID Submission Template</a>&nbsp;<span class="sm-font">(XLS, 35 KB)</span></p>
+                <div class="float" style="margin-top:22px;"><input type="button" value="Start &#187;" class="action_button" onClick="parent.location='Analysis/Step1'" /></div>
+            </div>
+            <div id="create-bg"><img src="@Url.Content("~/Content/inc/img/clear.png")" width="1" height="1" /></div>   
+        </div>
+        <div class="main-content" id="recent">
+        	<div class="content-right">
+                <h1>My Library</h1>
+                <p>Access your previously created reports. The most recent reports are listed below.</p>
+                <p>Recent work:</p>
+                <ul>
+                    @foreach (EvalEngine.UI.Models.ReportDisplay report in Model.Reports)
+                    {
+                        <li><a href="@Url.Action("Step4", "Analysis", new { id = report.Id })">@if (report.Name.Length > 25)
+                                                                                                   {@String.Concat(report.Name.Substring(0, 25), "...")  }
+                                                                                                   else { @report.Name} </a>&nbsp;<span class="sm-font"></span></li>
+                    }
+                </ul><br />
+                <!--<div class="float"><input type="button" value="Go &#187;" class="action_button" onClick="parent.location='Analysis/Library'" /></div>-->
+            </div>
+            <div id="recent-bg"><img src="@Url.Content("~/Content/inc/img/clear.png")" alt="My Library" width="1" height="1" /></div>
+        </div>

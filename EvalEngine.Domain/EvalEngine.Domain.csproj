@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{213DC72F-FF31-4AD3-A7D6-39F1E6E61337}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EvalEngine.Domain</RootNamespace>
+    <AssemblyName>EvalEngine.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy-Dev|AnyCPU'">
+    <OutputPath>bin\Deploy-Dev\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EvalEngine.UI\Tools\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\IAnalysesRepository.cs" />
+    <Compile Include="Abstract\IEntity.cs" />
+    <Compile Include="Abstract\IJobMessageRepository.cs" />
+    <Compile Include="Abstract\IJobResultsRepository.cs" />
+    <Compile Include="Abstract\IPasswordHistoryRepository.cs" />
+    <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="Abstract\IStateAssignmentRepository.cs" />
+    <Compile Include="Abstract\IStateRepository.cs" />
+    <Compile Include="Abstract\IUserAccountInfoRepository.cs" />
+    <Compile Include="Concrete\MPRHMACSHA512.cs" />
+    <Compile Include="Concrete\Repository.cs" />
+    <Compile Include="Concrete\SqlAnalysesRepository.cs" />
+    <Compile Include="Concrete\SqlJobMessageRepository.cs" />
+    <Compile Include="Concrete\SqlJobResultsRepository.cs" />
+    <Compile Include="Concrete\SqlPasswordHistoryRepository.cs" />
+    <Compile Include="Concrete\SqlStateAssignmentRepository.cs" />
+    <Compile Include="Concrete\SqlStateRepository.cs" />
+    <Compile Include="Concrete\SqlUserAccountInfoRepository.cs" />
+    <Compile Include="Entities\Analysis.cs" />
+    <Compile Include="Entities\Constants.cs" />
+    <Compile Include="Entities\JobResults.cs" />
+    <Compile Include="Entities\JobResults_Outcomes.cs" />
+    <Compile Include="Entities\JobStudentId.cs" />
+    <Compile Include="Entities\Job.cs" />
+    <Compile Include="Entities\JobStatus.cs" />
+    <Compile Include="Entities\JobStudyId.cs" />
+    <Compile Include="Entities\LogInformation.cs" />
+    <Compile Include="Entities\PasswordHistory.cs" />
+    <Compile Include="Entities\State.cs" />
+    <Compile Include="Entities\StateAssignment.cs" />
+    <Compile Include="Entities\UserOptions.cs" />
+    <Compile Include="Entities\UserAccountInfo.cs" />
+    <Compile Include="Entities\YearOfInterest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

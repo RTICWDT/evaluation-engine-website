@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Evaluation Engine Report - Overall Results";
+}
+@model EvalEngine.UI.Models.Step4Model
+@using Svg;
+@using System.Text;
+@using EvalEngine.UI.Helpers;
+@using Remotion.Data.Linq.Clauses
+<style>
+div.pp_overall svg rect.dimple-control, div.pp svg rect.dimple-control, div.ss svg rect.dimple-control  {
+    stroke: #325D87;
+    fill: #325D87;
+}
+div.pp_overall svg rect.dimple-treatment, div.pp svg rect.dimple-treatment, div.ss svg rect.dimple-treatment  {
+    stroke: #E8750C;
+    fill: #E8750C;
+}
+
+</style>
+<div class="form-container">
+	<div class="form-step step-4"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="View Results" /></div>
+	<div class="form-tips-narrow">
+		<div style="">
+		    <div class="report-section-wrapper">
+			    <span class="dropdown">
+				    <h1>Report Sections</h1>
+					    <ul>
+						    <li><a class="selected" href="@Url.Action("Step4", "Analysis", new { id = ViewBag.ID })">Overall Results</a></li>
+                            <li><a href="@Url.Action("Step4a", "Analysis", new { id = ViewBag.ID })">Subgroup Analysis</a></li>
+						    <li><a href="@Url.Action("Step4b", "Analysis", new { id = ViewBag.ID })">Data and Statistical Methods</a></li>
+						    <li><a href="@Url.Action("Step4c", "Analysis", new { id = ViewBag.ID })">User Descriptions</a> </li>
+					    </ul>
+			    </span>
+                <br />
+                <a href="@Url.Action("Step4Rota", "Analysis", new { id = ViewBag.ID })"><img src="@Url.Content("~/Content/inc/img/pdficon_small.png")" /> Download Report</a></div>
+		</div>
+        <br />
+</div>
+		
+	
+	<div class="form-output">
+		<h1>Overall Results</h1>
+      <div class="indent">
+        <p>This report shows differences between participants in the intervention of interest (@Model.Report.StudyName) and a comparison group of students with similar or identical background 
+        characteristics and prior academic achievement. Information about participants and control group students is drawn from the state’s longitudinal data system (SLDS).</p>
+        <br />
+        <p>The SLDS contained suitable matches for @Model.Report.TreatmentCount program participants @(Model.Report.IsMultiGrade ? " in grades " + Model.Report.GradeList + " at the outset of the the intervention" : ""). Each of these @Model.Report.TreatmentCount participants was matched to one, two, three or four 
+        non-participants, with a total of @Model.Report.ControlCount distinct non-participants serving as matched controls.</p>
+        <br />
+        <p>The impact estimates for @Model.Report.StudyName are presented in the figures and tables that follow.
+	The figures compare the participant group as a whole to the collection of matched counterparts, while the subsequent tables (if requested) report subgroup-specific comparisons. Details of these calculations are given in the Data and Statistical Methods Appendix, under <a href="#sec4" class="RLink Step4b">Outcome Analysis</a> and in <a href="#sec7" class="RLink Step4b">subsequent paragraphs</a>.</p>
+		<br />
+      
+		@foreach (EvalEngine.UI.Models.ReportChart chart in Model.Report.ChartCollection)
+  {
+      if (String.IsNullOrEmpty(chart.ChartData_PerGrade))
+      {
+          <div class="chart-container">
+          @if (chart.Type != "pp")
+          {
+              <p style="border-bottom: #D4DADE 1px solid; margin-bottom: 10px; padding-bottom: 10px; padding-top: 10px; font-weight: 600;">OUTCOME: @chart.Title</p>
+              <p style="padding-bottom: 5px; color: #F2790C; font-weight: 600;">@chart.OutcomeTitle</p>
+
+          }
+
+              @Html.Partial("Charting/Bar", chart)
+              <p>@chart.Header</p>
+              @Html.Raw(chart.Footer)
+              <p style="padding-top: 7px;"><span class="sm-font">Notes: @Html.Raw(@chart.OutcomeNote)</span></p>
+              <!--<p style="padding-top:7px;"><span class="sm-font">Notes from the analyst: @chart.Note</span></p>-->
+
+              <br/>
+          </div>
+      }
+      else
+      {
+          <div class="chart-container">
+          @if (chart.Type != "pp")
+          {
+              <p style="border-bottom: #D4DADE 1px solid; margin-bottom: 10px; padding-bottom: 10px; padding-top: 10px; font-weight: 600;">
+                  OUTCOME: @chart.Title </p>
+
+              <p style="padding-bottom: 5px; color: #F2790C; font-weight: 600;">@chart.OutcomeTitle</p>
+          }
+
+              @if (chart.Type == "ss")
+              {
+                  @Html.Partial("Charting/EffectSize", chart)
+              }
+              else if (chart.Type != "stacked")
+              {
+                  @Html.Partial("Charting/OverallProficiency", chart)
+              }
+
+
+              <div style="border: #D4DADE 1px solid; margin-top: 20px; margin-bottom: 5px;">
+                  <div id="chart@(chart.Rank.ToString())@(chart.Type.ToString())" class="@(chart.Type.ToString())"></div>
+                  @if (chart.Type != "stacked")
+                  {
+                      @Html.Partial("Charting/MultiGrade", chart)
+                  }
+                  else
+                  {
+                      @Html.Partial("Charting/StackedBar", chart)
+                  }
+
+              </div>
+              <p>@chart.Header</p>
+              @Html.Raw(chart.Footer)
+              <p style="padding-top: 7px;"><span class="sm-font">@Html.Raw(@chart.OutcomeNote)</span></p>
+
+              <br/>
+          </div>                
+      }
+  }		  
+		 </div>
+
+		 
+	</div><!--end form-->
+</div><!--end form-container-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.table-note-container').each(function () {
+            var index = $(this).index($('.table-note-container'));
+            $(this).css("height", $('.table-container').eq(index).height());
+        });
+        $('.chart-note-container').each(function () {
+            var index = $(this).index($('.chart-note-container'));
+            $(this).css("height", $('.chart-container').eq(index).height());
+        });
+        $('.RLink').click(function (event) {
+            event.preventDefault();
+            var loc = window.location.href;
+            var page = $(this).attr('class').split(' ')[1];
+            loc = loc.replace('Step4', page) + $(this).attr('href');
+            window.location.href = loc;
+        });
+    });
+</script>

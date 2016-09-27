@@ -1,0 +1,19 @@
+﻿@{
+	ViewBag.Title = "Step 4. Error Generating Report";
+}
+
+@model EvalEngine.UI.Models.ErrorModel
+
+<link rel="stylesheet" href="@Url.Content("~/Content/inc/css/rotate.css")" type="text/css" />
+<div class="form-container">
+	<div class="form-step step-3"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="Evaluate" /></div>
+	<div class="form-tips">
+	</div><!--end form-tips-->
+	<div class="form">
+		<h2>Step 4. Error Generating Report</h2>
+		<br />
+	    <p>Unfortunately, we encountered an error while generating your report. We are looking into the problem.</p>
+	    <br/>
+	    <p>@Html.Raw(Model.Error)</p>
+	</div><!--end form-->
+</div><!--end form-container-->

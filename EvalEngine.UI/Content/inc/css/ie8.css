@@ -1,0 +1,23 @@
+ul.header-links li.space, ul.acct-links li.space{
+	margin-left:12px;
+	margin-right:11px;
+}
+
+#load 
+{
+   border: 1px solid #D4DADE;
+}
+
+h2{
+
+}
+
+.action_button, .cancel_button{
+	font-size:12px;
+
+}
+
+.data-login{
+
+	filter:none;
+}

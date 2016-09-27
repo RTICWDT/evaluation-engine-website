@@ -1,0 +1,42 @@
+﻿@model EvalEngine.UI.Models.ResetPasswordModel
+@{
+    ViewBag.Title = "Reset Password";
+    Layout = "~/Views/Shared/_ExternalLayout.cshtml"; 
+    this.ViewBag.ShowBreadCrumbs = false;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Password change was unsuccessful. Please correct the errors and try again.")
+    @Html.AntiForgeryToken()
+<div class="login">
+    	<div class="login-form">
+        	<h1>Reset Password</h1>
+            <font style="color:#FF2222">@TempData["message"]</font>
+            <span class="validation">@this.Html.ValidationMessageFor(m => m.NewPassword)</span>
+            <span class="label">New Password:</span>
+           @this.Html.PasswordFor(m => m.NewPassword)
+            <span class="label">Confirm Password:</span>
+            @this.Html.PasswordFor(m => m.ConfirmPassword)
+            <span class="validation">@this.Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
+            <span class="label">
+            	<span class="float"><input type="submit" value="Reset Password" class="action_button" /></span>
+            </span>
+        </div><!--end login form-->
+        <div style="padding:60px;padding-bottom:40px;">
+        	<div>   <h1 style="padding-left:10px;">Password Requirements</h1>
+                   <ul style="background:#6d808e;color:white;padding:15px;margin:10px;padding-left:30px;">
+                    <li>Minimum of 12 characters</li>
+                    <li>Contains at least one of each:</li>
+                        <ul style="padding-left:30px;">
+                        <li>Upper case letter</li>
+                        <li>Lowercase letter</li>
+                        <li>Number</li>
+                        <li>Special character</li>
+                        </ul>
+                    <li>Cannot reuse one of your last 24 passwords</li>
+                </ul>
+            </div>
+        </div>
+    </div><!--end login-->    
+}

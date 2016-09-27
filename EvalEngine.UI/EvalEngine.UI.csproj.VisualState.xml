@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]C:\GEE\EvalEngine\EvalEngine.UI\EvalEngine.UI.csproj</TopNode>
+  <SelectedNode>[0-1001]C:\GEE\EvalEngine\EvalEngine.UI\bin\EvalEngine.UI.dll</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]C:\GEE\EvalEngine\EvalEngine.UI\EvalEngine.UI.csproj" Expanded="true" />
+  </Nodes>
+</VisualState>

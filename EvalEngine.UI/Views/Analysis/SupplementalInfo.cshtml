@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "SupplementalInfo";
+    Layout = null; 
+}
+@model EvalEngine.UI.Models.Step4Model
+@using Svg;
+@using System.Text;
+@using EvalEngine.UI.Helpers;
+
+@Html.Raw(@Model.Report.SupplementalInformation)

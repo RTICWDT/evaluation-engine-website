@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Step 2. Advanced Options";
+}
+
+@model EvalEngine.UI.Models.Step2CModel
+
+  @using (Html.BeginForm())
+  {
+	@Html.AntiForgeryToken()
+
+<style>
+div.item {white-space: nowrap;display:inline;margin-left:10px;line-height:2em; }
+div.item label{
+	margin-left:8px;
+	vertical-align:baseline;
+}
+span.block
+{
+	padding-left:10px;
+}
+div.measures{ padding-left:15px;}
+</style>
+<div class="form-container">
+	<div class="form-step step-2"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="Define Analysis" /></div>
+	<div class="form-tips helpful-info">
+		<h2>Helpful Information</h2>
+ <ul><li>Ordinarily and by default, the Evaluation Engine matches participants to similar non-participants attending schools in the same district, unless it finds more suitable matches elsewhere.  You can override this behavior in either of two ways: you can insist on within-district matching, or you can forbid it. Requiring that the matches be made within district may make sense if your program was confined to a small number of districts, and you know more about conditions affecting non-participating students in these districts than in other districts. In this case, requiring within-district matching will give you a better understanding of the conditions that comparison-group students were exposed to.  You might forbid within-district matches for a single-district program that was offered to most or all students sharing a certain combination o demographic and prior achievement characteristics. The few non-participants in that district who resemble participants in terms of matching variables may differ systematically on variables that are not available to the matching procedure, making it safer to draw matches from other districts exclusively. </li></ul>
+</div><!--end form-tips-->
+	<div class="form">
+		<h2>Step 2. Advanced Options</h2>
+        <div class="question">
+        <p class="one">District Matching Preference:</p>
+        <span class="block sub">        
+            <label>@Html.RadioButtonFor(m => m.DistrictMatch, 0) Within-district preferred (but across-district matching also permitted)</label><br />
+            <label>@Html.RadioButtonFor(m => m.DistrictMatch, 1) Within-district matching only</label><br />
+            <label>@Html.RadioButtonFor(m => m.DistrictMatch, 2) Across-district matching only</label>
+        </span>
+        </div>
+	</div><!--end form-->
+	<div class="form-buttons">
+		<input type="submit" value="Back" class="cancel_button" name="submitForm" />&nbsp;&nbsp;
+		<input type="submit" value="Save &amp; Continue" class="action_button" name="submitForm" />
+	</div>
+</div><!--end form-container-->
+  }

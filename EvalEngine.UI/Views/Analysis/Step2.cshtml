@@ -1,0 +1,35 @@
+﻿@{
+	ViewBag.Title = "Step 2. Define Analysis";
+}
+
+@model EvalEngine.UI.Models.Step2Model
+  @using (Html.BeginForm())
+  {
+	@Html.AntiForgeryToken()  	  
+<div class="form-container">
+	<div class="form-step step-2"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="Define Analysis" /></div>
+	<div class="form-tips helpful-info">
+		<h2>Helpful Information</h2>
+        <ul><li>Include a name of the intervention group that briefly describes the students for whom you uploaded IDs.</li>
+        <li>You may want to include notes for yourself about the intervention you are evaluating in this analysis. User notes will appear at the end of the report.</li></ul>
+	</div><!--end form-tips-->
+	<div class="form">
+		<h2>Step 2. Define Analysis</h2>
+		<h3>General Intervention Information</h3>
+		<div class="question">
+			<p class="one">Name of intervention group:</p>
+            <p style="padding-left:24px;"><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.StudyName)</font></p>
+			<span class="block sub">@Html.TextBoxFor(m => m.StudyName, new { id = "studyName", style = "width:557px;" })</span>
+		</div>
+		<div class="question">
+			<p class="two">(Optional) Description of intervention:</p>
+            <p style="padding-left:24px;"><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.StudyDescription)</font></p>
+			<span class="block sub">@Html.TextAreaFor(m => m.StudyDescription, new { style = "width:557px;height:200px;" })</span>
+		</div>
+	</div><!--end form-->
+	<div class="form-buttons">
+		<input type="submit" value="Back" class="cancel_button" name="submitForm"  />&nbsp;&nbsp;
+		<input type="submit" value="Save &amp; Continue" class="action_button" name="submitForm" />
+	</div>
+</div><!--end form-container-->
+  }

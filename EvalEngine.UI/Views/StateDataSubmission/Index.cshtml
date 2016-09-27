@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "State Data Sumbission Portal";
+    Layout = "~/Views/Shared/_ExternalLayout.cshtml"; 
+}
+
+<div class="float w40">
+            <div class="login-box">
+                <img src="@Url.Content("~/Content/inc/img/t_data_test.png")" alt="Data Test" width="136" height="18" class="title_img" />
+                <p>&nbsp;</p><br />
+                <form action="https://transfer.evaluationengine.org/envelope/submission"><span class="float"><input type="submit" value="GO" class="action_button"  /></span></form> 
+            </div>
+            <div class="login-box">
+                <img src="@Url.Content("~/Content/inc/img/t_upload_data.png")" alt="Upload Data" width="136" height="18" class="title_img" />
+                <p>&nbsp;</p><br />
+                <form action="https://transfer.evaluationengine.org/envelope/submission"><span class="float"><input type="submit" value="GO" class="action_button"  /></span></form> 
+            </div>
+</div>
+<img src="@Url.Content("~/Content/inc/img/data_placeholder.png")" style="margin-left:35px;margin-top:35px;" alt="Instructions for uploading data"/>

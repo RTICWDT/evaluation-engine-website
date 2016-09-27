@@ -1,0 +1,41 @@
+﻿@model EvalEngine.UI.Models.SendResetUrlModel
+@{
+    ViewBag.Title = "Reset Password";
+    Layout = "~/Views/Shared/_ExternalLayout.cshtml"; 
+    this.ViewBag.ShowBreadCrumbs = false;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "")
+    @Html.AntiForgeryToken()
+<div class="login">
+    	<div class="login-form" style="height:230px">
+        	<h1>Reset Password</h1>
+                 @if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|SUCCESS")))
+                {
+                    <div class="box confirmation"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|SUCCESS"))</div>
+                }
+                else if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|FAILURE")))
+                {
+                    <div class="box error"><img src="@Url.Content("~/Content/inc/img/icon_error.png")" alt="Failure icon" width="15" height="11" />&nbsp;@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|FAILURE"))</div>
+                }
+                else if (TempData["message"] != null)
+                {
+                 <div class="box confirmation"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;@TempData["message"]</div>   
+                }
+            <span class="validation">@Html.ValidationMessageFor(m => m.UserEmail)</span>
+            <span class="label">@Html.LabelFor(m => m.UserEmail)</span>
+            @Html.TextBoxFor(m => m.UserEmail)
+            <span class="label">
+            	<span class="float"><input value="Send Password Reset Email" class="action_button"  type="submit"/></span>
+            </span>
+        </div>
+        <div style="padding:60px;padding-bottom:40px;">
+        	        	<h1 style="padding-left:10px;">Password Requirements</h1><div style="background:#6d808e;color:white;padding:15px;margin:10px;padding-left:30px;"> 
+                   <p>Please enter your email address. You will recieve an email containing instructions for resetting your password shortly.</p>
+                   <br /><br /><br /><br /><br /><br />
+            </div>
+        </div>
+    </div> 
+}

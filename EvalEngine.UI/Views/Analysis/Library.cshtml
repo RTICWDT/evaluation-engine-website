@@ -1,0 +1,77 @@
+﻿@model List<EvalEngine.UI.Models.LibraryItem>
+@{
+    ViewBag.Title = "Library";
+}
+
+    	<div class="content_header">
+        	<h4>My Library</h4>
+        </div><!--end content_header-->
+    	<div class="content">
+            @if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|SUCCESS")))
+            {
+                <div class="box confirmation" style="width:938px;"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|SUCCESS"))</div>
+            }
+            else if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|FAILURE")))
+            {
+                <div class="box error" style="width:938px"><img src="@Url.Content("~/Content/inc/img/icon_error.png")" alt="Failure icon" width="15" height="11" />&nbsp;@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|FAILURE"))</div>
+            }
+            else if (TempData["message"] != null)
+            {
+                <div class="box confirmation" style="width:938px;"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;@TempData["message"]</div>   
+            }
+            
+            <!--<div class="tab-wrapper" style="margin-top:10px;">
+            	<div class="tab up"><a href="@this.Url.Action("MyAccount", "Account")">My Account</a></div>
+                <div class="tab up"><a href="@this.Url.Action("Add", "Account")">Create New Account</a></div>
+                <div class="tab down"><a href="@this.Url.Action("Users", "Account")">Manage Accounts</a></div>
+            </div>end tab-wrapper-->
+            
+            <p class="directions">Select the report you'd like to view, if available.</p>
+            <div class="table-wrapper" style="margin-top:20px;">
+            <table class="table table-striped tablesorter" id="date-accts" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                        <th class="state" style="width: 50px;">
+                            <span class="inline-link" ><i id="state" class="icon-chevron-down icon-white" ></i>
+                            </span>State
+                        </th>
+                        <th class="fname" style="width: 75px;">
+                            <span class="inline-link" ><i id="fnamei" class="icon-chevron-down icon-white" ></i>
+                            </span>Status
+                        </th>
+                        <th class="lname">
+                            <span class="inline-link" ><i id = "lnamei" class="icon-chevron-down icon-white"></i>
+                            </span>Job GUID
+                        </th>
+                        <th class="lname">
+                            <span class="inline-link" ><i id = "lnamei" class="icon-chevron-down icon-white"></i>
+                            </span>Parameters
+                        </th>
+                        <th class="email">
+                            <span class="inline-link" ><i id="emaili" class="icon-chevron-down icon-white"></i>
+                            </span>Link
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (EvalEngine.UI.Models.LibraryItem report in Model)
+                    {
+                        <tr>
+                            <td>@this.Html.DisplayFor(modelItem => report.State)</td>
+                            <td>@this.Html.DisplayFor(modelItem => report.Status)
+                            </td>
+                            <td>@this.Html.DisplayFor(modelItem => report.JobGUID)
+                            </td>
+                            <td style="word-wrap: break-word">@Html.Raw(report.Params)</td>
+                            <td style="word-wrap: break-word">@if (report.Status == "DONE")
+                                {<a href="@Url.Action("Step4", "Analysis", new { id = report.Link })">@if (report.Name.Length > 25)
+                                                                                                                                    {@String.Concat(report.Name.Substring(0, 25), "...")  }
+                                                                                                                                    else
+                                                                                                                                    { @report.Name} </a>}
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div><!--end table-wrapper-->
+        </div><!--end content-->

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]C:\GEE\EvalEngine\EvalEngine.Test\EvalEngine.Test.csproj</TopNode>
+  <SelectedNode>[0-1001]EvalEngine.Test.AnalysisControllerTest</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]C:\GEE\EvalEngine\EvalEngine.Test\EvalEngine.Test.csproj" Expanded="true" />
+    <Node UniqueName="[0-1030]C:\GEE\EvalEngine\EvalEngine.Test\bin\Debug\EvalEngine.Test.dll" Expanded="true" />
+    <Node UniqueName="[0-1031]EvalEngine" Expanded="true" />
+    <Node UniqueName="[0-1032]EvalEngine.Test" Expanded="true" />
+    <Node UniqueName="[0-1009]EvalEngine.Test.AccountControllerTest" Expanded="true" />
+    <Node UniqueName="[0-1001]EvalEngine.Test.AnalysisControllerTest" Expanded="true" />
+    <Node UniqueName="[0-1027]EvalEngine.Test.HomeControllerTest" Expanded="true" />
+    <Node UniqueName="[0-1007]EvalEngine.Test.PasswordHistoryTest" Expanded="true" />
+  </Nodes>
+</VisualState>

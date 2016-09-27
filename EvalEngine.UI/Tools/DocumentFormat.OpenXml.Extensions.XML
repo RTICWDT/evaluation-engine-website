@@ -1,0 +1,907 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DocumentFormat.OpenXml.Extensions</name>
+    </assembly>
+    <members>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.FindCell(System.String)">
+            <summary>
+            Given a worksheet, column and row creates or returns a cell
+            </summary> 
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteSharedText(System.String,System.String)">
+            <summary>
+            Writes a shared string to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteSharedText(System.String,System.String,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes a shared string to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteSharedTextRange(System.String,System.String)">
+            <summary>
+            Writes a shared string to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteSharedTextRange(System.String,System.String,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes a shared string to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteText(System.String,System.String)">
+            <summary>
+            Writes an inline string to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteText(System.String,System.String,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes an inline string to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteTextRange(System.String,System.String)">
+            <summary>
+            Writes an inline string to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteTextRange(System.String,System.String,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes an inline string to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteNumber(System.String,System.String)">
+            <summary>
+            Writes a number to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteNumber(System.String,System.String,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes a number to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteNumberRange(System.String,System.String)">
+            <summary>
+            Writes a number to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteNumberRange(System.String,System.String,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes a number to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteDate(System.String,System.DateTime)">
+            <summary>
+            Writes adate to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteDateRange(System.String,System.DateTime)">
+            <summary>
+            Writes a date to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteValue(System.String,System.String,DocumentFormat.OpenXml.Spreadsheet.CellValues)">
+            <summary>
+            Writes any value to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteValue(System.String,System.String,DocumentFormat.OpenXml.Spreadsheet.CellValues,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes any value to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteValueRange(System.String,System.String,DocumentFormat.OpenXml.Spreadsheet.CellValues)">
+            <summary>
+            Writes any value to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteValueRange(System.String,System.String,DocumentFormat.OpenXml.Spreadsheet.CellValues,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes any value to the range specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteValues(System.String,System.Collections.Generic.List{System.String},DocumentFormat.OpenXml.Spreadsheet.CellValues)">
+            <summary>
+            Writes any value to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteDataTable(System.Data.DataTable,System.String)">
+            <summary>
+            Pastes a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Includes column headers and all columns.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteDataTable(System.Data.DataTable,System.String,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Pastes a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Includes column headers and all columns.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteDataTable(System.Data.DataTable,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Pastes a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Includes column headers and columns from the data table specified in the columnNames list.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteDataTable(System.Data.DataTable,System.String,System.Collections.Generic.List{System.String},DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Pastes a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Includes column headers and columns from the data table specified in the columnNames list.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertDataTable(System.Data.DataTable,System.String)">
+            <summary>
+            Inserts a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Sufficient rows are inserted to make space for the data table. Includes column headers and all columns.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertDataTable(System.Data.DataTable,System.String,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Inserts a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Sufficient rows are inserted to make space for the data table. Includes column headers and all columns.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertDataTable(System.Data.DataTable,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Pastes a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Sufficient rows are inserted to make spac for the data table. Includes column headers and all columns.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertDataTable(System.Data.DataTable,System.String,System.Collections.Generic.List{System.String},DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Pastes a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Sufficient rows are inserted to make spac for the data table. Includes column headers and all columns.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetStyle(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,System.String)">
+            <summary>
+            Sets the font style and colour for a cell.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetStyle(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,System.String,System.String)">
+            <summary>
+            Sets style information for a range of cells.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertRow(System.UInt32)">
+            <summary>
+            Inserts a new row into worksheet and updates all existing cell references.
+            </summary> 
+            <remarks>
+            Formula references are not updated by this method.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertRows(System.UInt32,System.UInt32)">
+            <summary>
+            Inserts one or more rows into worksheet and updates all existing cell references. Returns the last row.
+            </summary> 
+            <remarks>
+            Formula references are not updated by this method.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.DeleteRow(System.UInt32)">
+            <summary>
+            Delete a row into worksheet and updates all existing cell references.
+            </summary> 
+            <remarks>
+            Formula references are not updated by this method.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.DeleteRows(System.UInt32,System.UInt32)">
+            <summary>
+            Delete one or more rows into worksheet and updates all existing cell references.
+            </summary> 
+            <remarks>
+            Formula references are not updated by this method.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.DrawBorder(System.String,System.String,System.String,DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues)">
+            <summary>
+            Draws a border around the area defined by the two cell references.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.ClearBorder(System.String,System.String)">
+            <summary>
+            Clears the border around the area defined by the two cell references.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.MergeCells(System.String,System.String)">
+            <summary>
+            Merges the cell area defined by the two references into one cell.
+            </summary> 
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetPrintArea(System.String,System.String,System.String)">
+            <summary>
+             Sets the defined name representing the print area for a worksheet
+             </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.Save">
+            <summary>
+            Saves this worksheet and all related document parts.
+            </summary> 
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.FindRow(System.UInt32)">
+            <summary>
+            Returns a row from the row index provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.FindColumn(System.UInt32)">
+            <summary>
+            Returns a column from the column index provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.FindColumn(System.String)">
+            <summary>
+            Returns a column from the column name provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetColumnWidth(System.UInt32,System.Double)">
+            <summary>
+            Sets the width of a column by index.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetColumnWidth(System.String,System.Double)">
+            <summary>
+            Sets the width of a column by name.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteSharedText(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.String)">
+            <summary>
+            Given a spreadsheet reference and text, writes a shared string to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteText(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.String)">
+            <summary>
+            Given a spreadsheet reference and text, writes an inline to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteNumber(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.String)">
+            <summary>
+            Given a spreadsheet reference and text, writes a number to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteDate(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.DateTime)">
+            <summary>
+            Given a spreadsheet reference and date, writes the date to a row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteValue(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.String,DocumentFormat.OpenXml.Spreadsheet.CellValues,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Given a spreadsheet reference and text, writes any value to the row and column specified.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.FindCell(System.String,System.UInt32,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Given a worksheet, column and row, returns an existing cell or creates a new one if it doesnt exist
+            </summary> 
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertRow(System.UInt32,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Inserts a new row into worksheet and updates all existing cell references.
+            </summary> 
+            <remarks>
+            Formula references are not updated by this method.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertRows(System.UInt32,System.UInt32,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Inserts one or more rows into worksheet and updates all existing cell references. Returns the last row.
+            </summary> 
+            <remarks>
+            Formula references are not updated by this method.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.DeleteRow(System.UInt32,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Delete a row into worksheet and updates all existing cell references.
+            </summary> 
+            <remarks>
+            Formula references are not updated by this method.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.DeleteRows(System.UInt32,System.UInt32,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Delete one or more rows into worksheet and updates all existing cell references. Returns the last row.
+            </summary> 
+            <remarks>
+            Formula references are not updated by this method.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.InsertDataTable(System.Data.DataTable,DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.Collections.Generic.List{System.String},DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Inserts a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Sufficient rows are inserted into the worksheet to contain the data. Includes column headers and all columns, or columns if columnNames is supplied.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteDataTable(System.Data.DataTable,DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.Collections.Generic.List{System.String},DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Pastes a datatable into a worksheet at the location specified and returns the rowindex of the last row.
+            </summary>
+            <remarks>
+            Includes column headers and all columns, or columns if columnNames is supplied.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.PasteValues(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.Collections.Generic.List{System.String},DocumentFormat.OpenXml.Spreadsheet.CellValues,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Writes a list of values to the location specified, returning the ending column.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetStyle(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32)">
+            <summary>
+            Sets the style information for a cell.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetStyle(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32,System.String,System.UInt32)">
+            <summary>
+            Sets the style for the defined area of cells.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.GetStyleIndex(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Packaging.WorkbookStylesPart)">
+            <summary>
+            Returns an existing style index or creates a new style index from the style information provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.GetReservedStyleIndex(System.UInt32,DocumentFormat.OpenXml.Packaging.WorkbookStylesPart)">
+            <summary>
+            Returns an existing reserved number format style index or creates a new style index from the number format id provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.DrawBorder(System.String,System.UInt32,System.String,System.UInt32,System.String,DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues,DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Draws a border around the area defined by the two cell references.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.ClearBorder(System.String,System.UInt32,System.String,System.UInt32,DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Draws a border around the area defined by the two cell references.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.MergeCells(System.String,System.UInt32,System.String,System.UInt32,DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Creates a merged cell from the references supplied
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.Save(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Saves the worksheet and all related document parts.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.FindRow(DocumentFormat.OpenXml.Spreadsheet.SheetData,System.UInt32)">
+            <summary>
+            Gets the row specified at the row index, or creates a new row if one does not exist.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.FindColumn(DocumentFormat.OpenXml.Packaging.WorksheetPart,System.UInt32)">
+            <summary>
+            Gets a column from the sheet data
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetColumnWidth(DocumentFormat.OpenXml.Packaging.WorksheetPart,System.UInt32,System.Double)">
+            <summary>
+             Set the column width of a column
+             </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetPrintArea(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String,System.String,System.UInt32,System.String,System.UInt32)">
+            <summary>
+             Sets the defined name representing the print area for a worksheet
+             </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetWriter.SetPageSetup(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.UInt32,DocumentFormat.OpenXml.Spreadsheet.OrientationValues)">
+            <summary>
+             sets the page setup options for a worksheet
+             </summary>
+        </member>
+        <member name="P:DocumentFormat.OpenXml.Extensions.WorksheetWriter.Spreadsheet">
+            <summary>
+            Returns the current spreadsheet
+            </summary> 
+        </member>
+        <member name="P:DocumentFormat.OpenXml.Extensions.WorksheetWriter.Worksheet">
+            <summary>
+            Returns the current worksheet
+            </summary> 
+        </member>
+        <member name="T:DocumentFormat.OpenXml.Extensions.WorksheetReader">
+            <summary>
+            Provides the base functionality around Spreadsheets
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetReader.GetRow(DocumentFormat.OpenXml.Spreadsheet.SheetData,System.UInt32)">
+            <summary>
+            Gets the row specified at the row index if it exists
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetReader.GetColumn(DocumentFormat.OpenXml.Packaging.WorksheetPart,System.UInt32)">
+            <summary>
+            Gets a column from the sheet data
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetReader.GetCell(System.String,System.UInt32,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Returns a cell is one exists at the location supplied.
+            </summary>
+             <remarks>
+            Use FindCell instead if a missing cell should be created.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetReader.GetStyle(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32)">
+            <summary>
+            Gets the font, background and border style settings for a cell.
+            </summary>
+            <remarks>
+            If the cell does not exists, then a null reference (nothing) is returned
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetReader.GetStyleWithDefault(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.String,System.UInt32)">
+            <summary>
+            Gets the font, background and border style settings for a cell.
+            </summary>
+            <remarks>
+            If the cell does not exists, then the default style is returned instead.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.WorksheetReader.GetPageSetup(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Gets the page setup values for a worksheet.
+            </summary>
+        </member>
+        <member name="T:DocumentFormat.OpenXml.Extensions.SpreadsheetReader">
+            <summary>
+            Provides the base functionality around Spreadsheets as a set of static functions
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.AbstractReader.StreamFromFile(System.String)">
+            <summary>
+            Returns a memory stream with a copy of a file's contents.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.AbstractReader.GetEmbeddedResourceStream(System.String)">
+            <summary>
+            Returns a copy of an embedded resource from the project as a memory stream. 
+            </summary>
+            <remarks>
+            Include any folder paths in the filename parameter.
+            </remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.AbstractReader.Copy(System.String)">
+             <summary>
+             Returns a copy of a file provided as a memory stream.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.Create">
+             <summary>
+             Returns a new spreadsheet document as a stream from the blank spreadsheet template.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.GetWorksheetPartByName(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String)">
+            <summary>
+            Returns a worksheet part from a spreadsheet by name
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.GetColumnName(System.String,System.Int32)">
+            <summary>
+            Returns the name of a column offset by the supplied distance.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.GetColumnIndex(System.String)">
+            <summary>
+            Returns the index of the column name supplied.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.ColumnFromReference(System.String)">
+             <summary>
+             Returns the column from a cell reference
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.RowFromReference(System.String)">
+             <summary>
+             Returns the column from a cell reference
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.ReferenceFromRange(System.String)">
+             <summary>
+             Returns the first reference from a range that may include a sheet.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.GetDefaultStyle(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument)">
+            <summary>
+            Gets a copy of the default style information
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.GetWorkbookStyles(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument)">
+            <summary>
+            Returns the workbook styles part from a spreadsheet document.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.GetDefinedName(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String)">
+            <summary>
+            Returns a DefinedName matching the name supplied.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetReader.GetSheetId(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String)">
+            <summary>
+            Gets the internal sheet id from the sheet name
+            </summary>
+        </member>
+        <member name="T:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter">
+            <summary>
+            Provides the base functionality around Spreadsheets
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.AbstractWriter.StreamToFile(System.String,System.IO.MemoryStream)">
+            <summary>
+             Writes the contents of a stream to a file.
+             </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.InsertWorksheet(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument)">
+            <summary>
+            Inserts a new sheet into a SpreadsheetDocument and returns the name of the sheet
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.InsertWorksheet(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String)">
+            <summary>
+            Given a spreadsheet document and sheet name, inserts a new worksheet
+            </summary>
+            <param name="doc">The SpreadsheetDocument to insert the worksheet into.</param>
+            <param name="sheetname">The name of the new sheet.</param>
+            <returns>The new WorksheetPart or the existing part if a matching sheetname already exists.</returns>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.RemoveWorksheet(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String)">
+            <summary>
+            Deletes a worksheet from the document
+            </summary>
+            <param name="doc">The SpreadsheetDocument to remove the worksheet from.</param>
+            <param name="sheetName">The name of the sheet to remove.</param>
+            <returns>A boolean indicating whether the worksheet was successfully removed.</returns>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.GetSharedStringItem(System.String,DocumentFormat.OpenXml.Packaging.SharedStringTablePart)">
+            <summary>
+            Given text and a SharedStringTablePart, creates or returns a SharedStringItem with the specified text
+            </summary> 
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.CreateFont(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Packaging.WorkbookStylesPart)">
+            <summary>
+            Creates or gets an existing font with the style information provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.CreateFill(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Packaging.WorkbookStylesPart)">
+            <summary>
+            Creates or gets an existing font with the style information provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.CreateBorder(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Packaging.WorkbookStylesPart)">
+            <summary>
+            Creates or gets an existing font with the style information provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.CreateNumberFormat(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Packaging.WorkbookStylesPart)">
+            <summary>
+            Creates or gets an existing number format.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.Save(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument)">
+            <summary>
+            Saves the spreadsheet and all related document parts.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.SetRowSpans(DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Updates the row span attribute to the correct value for the cells contained within its.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.SetWorksheetDimension(DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Updates the row span attribute to the correct value for the cells contained within its.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.ToXmlNumeric(System.Object)">
+            <summary>
+            Writes a culture independent numeric string
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetWriter.ToXmlBoolean(System.Object)">
+            <summary>
+            Writes a boolean value in the correct format
+            </summary>
+        </member>
+        <member name="T:DocumentFormat.OpenXml.Extensions.DocumentWriter">
+            <summary>
+            Provides the base functionality around WordprocessingDocuments as a set of static functions
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.DocumentWriter.PasteText(System.String,System.String)">
+            <summary>
+            Pastes the text provided at a bookmark in the document body.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.DocumentWriter.PasteText(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Pastes a dictionary containing bookmark-text key pair values into the document.
+            </summary>
+            <remarks>Bookmarks that are found in the document are removed from the dictionary.</remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.DocumentWriter.Save">
+            <summary>
+            Saves all elements in the main document part
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.DocumentWriter.PasteText(System.String,System.String,DocumentFormat.OpenXml.Packaging.MainDocumentPart)">
+            <summary>
+            Pastes the text provided at a bookmark in the document body.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.DocumentWriter.PasteText(System.Collections.Generic.Dictionary{System.String,System.String},DocumentFormat.OpenXml.Packaging.MainDocumentPart)">
+            <summary>
+            Pastes a dictionary containing bookmark-text key pair values into a document.
+            </summary>
+            <remarks>Bookmarks that are found in the document are removed from the dictionary.</remarks>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.DocumentWriter.Save(DocumentFormat.OpenXml.Packaging.MainDocumentPart)">
+            <summary>
+            Saves all elements in the main document part
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.DocumentReader.Create">
+             <summary>
+             Returns a new spreadsheet document as a stream from the blank spreadsheet template.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.GetDefault(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument)">
+            <summary>
+            Returns the default SpreadsheetStyle obejct for the spreadsheet provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetColor(System.String)">
+            <summary>
+            Sets the color using R,G and B hex values eg "FF0000"
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetBackgroundColor(System.String)">
+            <summary>
+            Sets the color using R,G and B hex values eg "FF0000"
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetBorder(System.String,DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues)">
+            <summary>
+            Sets all four border color and styles.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetBorderTop(System.String,DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues)">
+            <summary>
+            Sets the top border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetBorderLeft(System.String,DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues)">
+            <summary>
+            Sets the left border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetBorderBottom(System.String,DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues)">
+            <summary>
+            Sets the bottom border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetBorderRight(System.String,DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues)">
+            <summary>
+            Sets the right border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetBorder(DocumentFormat.OpenXml.Spreadsheet.BorderPropertiesType,System.String,DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues)">
+            <summary>
+            Sets an individual border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetHorizontalAlignment(DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues)">
+            <summary>
+            Sets the horizontal alignment value
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetVerticalAlignment(DocumentFormat.OpenXml.Spreadsheet.VerticalAlignmentValues)">
+            <summary>
+            Sets the vertical alignment value
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.SetFormat(System.String)">
+            <summary>
+            Sets the format code value
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ClearBorder">
+            <summary>
+            Sets all four border color and styles.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ClearBorderTop">
+            <summary>
+            Sets the top border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ClearBorderLeft">
+            <summary>
+            Sets the left border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ClearBorderBottom">
+            <summary>
+            Sets the bottom border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ClearBorderRight">
+            <summary>
+            Sets the right border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ClearBorder(DocumentFormat.OpenXml.Spreadsheet.BorderPropertiesType)">
+            <summary>
+            Sets an individual border's color and style.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.AddFont(DocumentFormat.OpenXml.Spreadsheet.Font)">
+            <summary>
+            Overrides any style information by copying from the Font object provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.AddFill(DocumentFormat.OpenXml.Spreadsheet.Fill)">
+            <summary>
+            Overrides any fill style information by copying from from the Fill object provided
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.AddBorder(DocumentFormat.OpenXml.Spreadsheet.Border)">
+            <summary>
+            Overrides any border style information by copying from the Border object provided
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.AddAlignment(DocumentFormat.OpenXml.Spreadsheet.Alignment)">
+            <summary>
+            Overrides any style information by copying from the Alignment object provided.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.AddFormat(DocumentFormat.OpenXml.Spreadsheet.NumberingFormat)">
+            <summary>
+            Overrides any number format information by copying from from the object provided
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ToFont">
+            <summary>
+            Returns a new Font object from the style information provided
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ToFill">
+            <summary>
+            Returns a new Font object from the style information provided
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ToBorder">
+            <summary>
+            Returns a new Border object from the style information provided
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ToAlignment">
+            <summary>
+            Returns a new Alignment object from this object
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.ToNumberFormat">
+            <summary>
+            Returns a new NumberFormat object from this object
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.Clone">
+            <summary>
+            Returns a deep copy of this object.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareFont(DocumentFormat.OpenXml.Spreadsheet.Font,DocumentFormat.OpenXml.Spreadsheet.Font)">
+            <summary>
+            Determines if the two font settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareFont(DocumentFormat.OpenXml.Spreadsheet.Font,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two font settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareFont(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two font settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareFill(DocumentFormat.OpenXml.Spreadsheet.Fill,DocumentFormat.OpenXml.Spreadsheet.Fill)">
+            <summary>
+            Determines if the two fill settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareFill(DocumentFormat.OpenXml.Spreadsheet.Fill,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two fill settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareFill(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two fill settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareBorder(DocumentFormat.OpenXml.Spreadsheet.Border,DocumentFormat.OpenXml.Spreadsheet.Border)">
+            <summary>
+            Determines if the two border settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareBorder(DocumentFormat.OpenXml.Spreadsheet.Border,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two border settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareBorder(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two border settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareAlignment(DocumentFormat.OpenXml.Spreadsheet.Alignment,DocumentFormat.OpenXml.Spreadsheet.Alignment)">
+            <summary>
+            Determines if the two alignment settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareAlignment(DocumentFormat.OpenXml.Spreadsheet.Alignment,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two alignment settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareAlignment(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two alignment settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareNumberFormat(DocumentFormat.OpenXml.Spreadsheet.NumberingFormat,DocumentFormat.OpenXml.Spreadsheet.NumberingFormat)">
+            <summary>
+            Determines if the two format settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareNumberFormat(DocumentFormat.OpenXml.Spreadsheet.NumberingFormat,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two format settings supplied are the same.
+            </summary>
+        </member>
+        <member name="M:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.CompareNumberFormat(DocumentFormat.OpenXml.Extensions.SpreadsheetStyle,DocumentFormat.OpenXml.Extensions.SpreadsheetStyle)">
+            <summary>
+            Determines if the two format settings supplied are the same.
+            </summary>
+        </member>
+        <member name="P:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.IsItalic">
+            <summary>
+            Sets or gets whether the style is italic
+            </summary>
+        </member>
+        <member name="P:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.IsBold">
+            <summary>
+            Sets or gets whether the style is bold
+            </summary>
+        </member>
+        <member name="P:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.IsUnderline">
+            <summary>
+            Sets or gets whether the style is underline
+            </summary>
+        </member>
+        <member name="P:DocumentFormat.OpenXml.Extensions.SpreadsheetStyle.IsWrapped">
+            <summary>
+            Sets or gets whether the style is underline
+            </summary>
+        </member>
+    </members>
+</doc>

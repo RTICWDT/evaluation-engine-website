@@ -1,0 +1,2 @@
+﻿﻿@model EvalEngine.UI.Models.CheckboxItem
+<span class="block">@this.Html.CheckBoxFor(x => x.Checked, new { @class="subgroup" } )@this.Html.HiddenFor(x => x.Value)@this.Html.LabelFor(x => x.Checked, "Subgroup")</span>

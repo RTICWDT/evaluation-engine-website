@@ -1,0 +1,63 @@
+﻿@model EvalEngine.UI.Models.LogOnModel
+
+@{
+    ViewBag.Title = "Log On";
+    Layout = "~/Views/Shared/_LogonLayout.cshtml"; 
+}
+
+@using (Html.BeginForm("LogOn", "Account", FormMethod.Post, new {@id="login_form"})) {
+    @Html.AntiForgeryToken()
+
+        <style>
+        .box 
+        {
+        	width:304px;
+        	margin-top:30px;
+        }
+        .float
+        {
+        	margin-right:8px;
+        }
+        input.action_button
+        {
+        	margin-top:0px;
+        }
+        span.forgotLink
+        {
+        	margin-top:15px;
+        }
+    </style>
+    <div class="login">
+    	<div class="login-form">
+        	<img src="@Url.Content("~/Content/inc/img/t_login.png")" alt="Login" width="53" height="13" /><br />
+            <span class="label">Username:</span>
+            @Html.TextBoxFor(m => m.Email, new { @id = "username" })
+            <span class="validation">@Html.ValidationMessageFor(m => m.UserName)</span>
+            <span class="label">Password:</span>
+            @Html.PasswordFor(m => m.Password, new { @id = "password" })     
+            <span class="validation">@Html.ValidationMessageFor(m => m.Password)</span>
+            <span class="label forgotLink">
+            	<span class="float"><input type="submit" value="Log in" class="action_button" name="logIn"/></span>
+                @Html.ActionLink("Forgot your password?", "SendResetUrl", null, new { @class = "forgotLink"})
+            </span>
+            <div style="height:50px;">
+                 @if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|SUCCESS")))
+                {
+                    <div class="box confirmation"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|SUCCESS"))</div>
+                }
+                else if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|FAILURE")))
+                {
+                    <div class="box error"><img src="@Url.Content("~/Content/inc/img/icon_error.png")" alt="Failure icon" width="15" height="11" />&nbsp;@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|FAILURE"))</div>
+                }
+                else if (TempData["message"] != null)
+                {
+                 <div class="box confirmation"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;@TempData["message"]</div>   
+                }
+            </div>     
+        </div><!--end login form-->
+        <div style="padding:60px;padding-bottom:40px;">
+        	<div><p style="background:#6d808e;color:white;padding:15px;margin:10px;">The Evaluation Engine makes it possible for states, school districts, and education researchers to perform quasi-experimental impact analyses using the power of state longitudinal data systems – without permitting access to confidential underlying data. Authorized users simply upload a list of IDs for students in the intervention of interest. The web application creates a propensity-score matched comparison group using data from the state longitudinal database. The analysis is done automatically and securely. Users come away with a simple report comparing outcomes for their students with the comparison group.</p></div>
+            <div style="text-align:center;margin-top:30px;">Contact: <a href="#">info@evaluationengine.org</a></div>
+        </div>
+    </div><!--end login-->
+}

@@ -1,0 +1,24 @@
+﻿@{
+	ViewBag.Title = "Step 3. Evaluate";
+}
+@model EvalEngine.UI.Models.Step2BModel
+<link rel="stylesheet" href="@Url.Content("~/Content/inc/css/rotate.css")" type="text/css" />
+<div class="form-container">
+	<div class="form-step step-3"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="Evaluate" /></div>
+	<div class="form-tips">
+		<h2>Helpful Information</h2>
+		<p>TBD</p>
+	</div><!--end form-tips-->
+	<div class="form">
+		<h2>Step 3. Evaluate</h2>
+		<br /><p>Your results are being processed. Results for most tests will be ready within one hour.</p>
+	</div><!--end form-->
+ @using (Html.BeginForm())
+  {
+	@Html.AntiForgeryToken() 
+	<div class="form-buttons">
+		<!--<input type="submit" value="Back" class="cancel_button" name="submitForm" />-->&nbsp;&nbsp;
+		<input type="submit" value="View Results" class="action_button" name="submitForm" />
+	</div>
+  }           
+</div><!--end form-container-->

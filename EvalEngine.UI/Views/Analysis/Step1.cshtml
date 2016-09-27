@@ -1,0 +1,75 @@
+﻿@{
+	ViewBag.Title = "Step 1. Participant Data";
+}
+
+@model EvalEngine.UI.Models.Step1Model
+@using EvalEngine.Domain.Entities
+  @using (Html.BeginForm())
+  {
+	@Html.AntiForgeryToken()  	  
+	<div class="form-container">
+		<div class="form-step step-1"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="Participant Data" /></div>
+		<div class="form-tips">
+			<h2>Helpful Information</h2>
+			<p>@Html.Raw(Model.HelpfulInfo)</p>
+		</div><!--end form-tips-->
+		<div class="form">
+			<h2>Step 1. Participant Data</h2>
+			<div class="question">
+				<p class="one">Do you have @TempData["StateIDText"]?</p>
+                <p style="padding-left:24px;">See explanation at right.</p>
+                <p><font style="color:#FF2222">@TempData["message"]</font></p>
+				<div class="answer-wrap">
+					<span class="block">@Html.RadioButton("HasStateID", true, new { id = "yes-id"})<label for="yes-id">Yes</label></span>
+					<span class="block">@Html.RadioButton("HasStateID", false, new { id = "no-id"})<label for="no-id">No</label></span>
+				</div>
+                
+			</div>
+
+			<!-- The following is displayed for discussion only 
+			<br />
+			<span class="gray">If No, then show question 2</span>
+			-->
+			@if ((bool)TempData["ShowStates"])
+			{  
+			<div class="question" id="q2">
+				<p class="two">Please select your state:</p>
+                <p><font style="color:#FF2222">@Html.ValidationMessageFor(m => m.State)</font></p>
+				<div class="answer-wrap">
+					<span id="radioStates">
+					@foreach (var item in Model.RadioStates)
+					{
+						<span class="block">
+						@this.Html.RadioButtonFor(x => x.State, item.Value)
+						@this.Html.LabelFor(x => x.State, item.Label)
+						</span>
+					}
+					</span>
+				</div>
+			</div>
+			}
+            @if (!(bool)TempData["ShowStates"])
+            {@this.Html.HiddenFor(x => x.State)}
+			<div class="question" id="q2"  style="display:none">
+				<p class="two">Which unique IDs do you have?</p>
+				<span class="validation">@Html.ValidationMessageFor(m => m.HasStateID)</span>
+				<div class="answer-wrap">
+					<span class="block"><input type="checkbox" id="district-id" /><label for="district-id">District student IDs</label></span>
+					<span class="block"><input type="checkbox" id="school-id" /><label for="school-id">School student IDs</label></span>
+					<span class="block"><input type="checkbox" id="dontKnow-id" /><label for="dontKnow-id">Don't know</label></span>
+				</div>
+			</div>
+		</div><!--end form-->
+		<div class="form-buttons">
+			<input type="submit" value="Save &amp; Continue" class="action_button" name="submitForm" />
+		</div>
+	</div><!--end form-container-->
+  }
+  <script type="text/javascript">
+	  $(document).ready(function () {
+      @if (HttpContext.Current.User.IsInRole(Constants.StateAdminRole) || HttpContext.Current.User.IsInRole(Constants.StateUserRole))
+      { 
+          
+      }
+	  });
+  </script>

@@ -1,0 +1,13 @@
+﻿@model EvalEngine.UI.Models.ReportChart
+
+<div style="width: 100%; display: inline-block;">
+    <div style="background: #ffffff; display: inline-block; border: 1px solid #D4DADE; margin: 5px; padding: 5px;">
+        <p style="color: #F2790C; font-weight: 600; text-align: center;">Effect Size:</p>
+        <p style="font-size: 16px; text-align: center;">@Model.ChartData_EffectSize</p>
+        @if (Model.GradeList.Contains(','))
+        {
+            <p style="font-size: 12px; text-align: center;">(combined across grades)</p>
+        }
+    </div>
+
+</div>

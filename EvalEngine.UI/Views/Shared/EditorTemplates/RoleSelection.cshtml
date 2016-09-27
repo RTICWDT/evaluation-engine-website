@@ -1,0 +1,6 @@
+﻿@model EvalEngine.UI.Models.RoleSelection
+<span class="block">
+    @this.Html.HiddenFor(x => x.RoleName)
+    @this.Html.RadioButtonFor(x => x.RoleName,this.Model.IsChecked)
+    @this.Html.LabelFor(x => x.IsChecked, this.Model.RoleName)
+</span>

@@ -1,0 +1,6 @@
+﻿@model EvalEngine.UI.Models.StateSelection
+<span class="block">
+    @this.Html.HiddenFor(x => x.StateId)
+    @this.Html.E(x => x.IsChecked,this.Model.StateName)
+    @this.Html.LabelFor(x => x.IsChecked, this.Model.StateName)
+</span>

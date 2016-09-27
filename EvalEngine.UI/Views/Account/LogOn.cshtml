@@ -1,0 +1,92 @@
+﻿@model EvalEngine.UI.Models.LogOnModel
+
+@{
+    ViewBag.Title = "Log On";
+    Layout = "~/Views/Shared/_LogonLayout.cshtml"; 
+}
+
+@using (Html.BeginForm("LogOn", "Account", FormMethod.Post, new {@id="login_form"})) {
+    @Html.AntiForgeryToken()
+
+    <div class="ee-logo"><img src="@Url.Content("~/Content/inc/img/evaluation_engine_v2.png")" alt="Evaluation Engine" width="329" height="62" />
+        <div class="login-form">
+            @Html.Hidden("returnUrl",@Request.QueryString)
+            @Html.TextBoxFor(m => m.Email, new {@id = "username", placeholder = "Email address"})
+            @Html.PasswordFor(m => m.Password, new {@id = "password", placeholder = "Password"})
+
+            <span class="float"><input type="submit" value="LOGIN" class="action_button" name="logIn"/></span><br/>
+            <span class="float">@Html.ActionLink("FORGOT YOUR PASSWORD?", "SendResetUrl", null, new {})</span>
+            <span class="validation">@Html.ValidationMessageFor(m => m.UserName)</span>
+            <span class="validation">@Html.ValidationMessageFor(m => m.Password)</span>
+
+            @if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|SUCCESS")))
+            {
+                <span class="success">@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|SUCCESS"))</span>
+            }
+            else if (TempData["message"] != null && (TempData["message"].ToString().EndsWith("|FAILURE")))
+            {
+                <span class="failure">@TempData["message"].ToString().Substring(0, TempData["message"].ToString().LastIndexOf("|FAILURE"))</span>
+            }
+            else if (TempData["message"] != null)
+            {
+                <span class="success">@TempData["message"]</span>
+            }
+
+            <!--<span class="validation">Enter your username.</span>-->
+            <!--<span class="success">A password link has been sent to your email.<br />Check the email and follow the instructions to reset your password.</span>-->
+            <!--<span class="success">Your password was successfully updated.</span>-->
+            <!--<span class="validation">The password field is required.</span>-->
+            <!--<span class="validation">The username or password you entered is incorrect.</span>-->
+        </div><!--end login form-->
+    
+    </div>
+    
+    
+    <div id="wrapper">
+	<div>
+		<div id="slideshow">
+			<ul id="slides">
+				<li><img src="@Url.Content("~/Content/inc/photos/slide-1.gif")" width="1003" height="468" alt="" /></li>
+				<li><img src="@Url.Content("~/Content/inc/photos/slide-2.gif")" width="1003" height="468" alt="" /></li>
+				<li><img src="@Url.Content("~/Content/inc/photos/slide-3.gif")" width="1003" height="468" alt="" /></li>                
+               	<li><img src="@Url.Content("~/Content/inc/photos/slide-4.gif")" width="1003" height="468" alt="" /></li>
+               	<li><img src="@Url.Content("~/Content/inc/photos/slide-5.gif")" width="1003" height="468" alt="" /></li> 
+                
+							</ul>
+		</div>
+	</div>
+    		<div class="slider-button-right" onclick="ss.move(1)">&raquo;</div><div class="slider-button" onclick="ss.move(-1)">&laquo;</div>
+
+
+	<ol id="pagination" class="pagination">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>        
+	</ol>
+</div>
+<script>
+var ss = new TINY.fader.init('ss', {
+	id: 'slides',
+	auto: 10,
+	resume: true,
+	navid: 'pagination',
+	navEvent: 'mouseover',
+	activeClass: 'current',
+	pauseHover: true,
+	duration: .5,
+	
+});
+</script>
+    <br clear="all" />
+    
+    
+    
+    <div class="login">
+    	
+        <div>
+            <p class="contact">Contact: <a href="#">info@evaluationengine.org</a></p>
+        </div>
+    </div><!--end login-->
+}

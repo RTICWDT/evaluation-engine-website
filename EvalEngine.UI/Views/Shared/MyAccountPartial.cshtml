@@ -1,0 +1,67 @@
+﻿@model EvalEngine.UI.Models.MyAccountModel
+           
+  @using (Html.BeginForm("MyAccountPartial", "Account"))
+  {
+      if (this.Html.ViewData.ModelState.ContainsKey("myAccountError"))
+    {      
+        @Html.ValidationSummary(true, "Profile update was unsuccessful. Please correct the errors and try again.")
+    }
+    @Html.AntiForgeryToken()  
+                        	<table>
+                                     @if (TempData["acct_message"] != null && (TempData["acct_message"].ToString().EndsWith("|SUCCESS")))
+                                    {
+                                        <tr><td colspan="2"><div class="box confirmation"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;
+                                            @TempData["acct_message"].ToString().Substring(0, TempData["acct_message"].ToString().LastIndexOf("|SUCCESS"))
+                                       </div></td></tr>  
+                                    }
+                                     else if (TempData["acct_message"] != null && (TempData["acct_message"].ToString().EndsWith("|FAILURE")))
+                                     {
+                                       <tr><td colspan="2"><div class="box error"><img src="@Url.Content("~/Content/inc/img/icon_error.png")" alt="Failure icon" width="15" height="11" />&nbsp;
+                                            @TempData["acct_message"].ToString().Substring(0, TempData["acct_message"].ToString().LastIndexOf("|FAILURE"))
+                                       </div></td></tr>                                     }
+                                     else if (TempData["acct_message"] != null)
+                                     {
+                                        <tr><td colspan="2"><div class="box confirmation"><img src="@Url.Content("~/Content/inc/img/icon_check.png")" alt="Success icon" width="15" height="11" />&nbsp;
+                                            @TempData["acct_message"]
+                                       </div></td></tr>                                             
+                                     }                                
+                            	<tr>
+                                	<td scope="row" width="50%">First Name: *</td>
+                                    <td width="50%">@this.Html.TextBoxFor(m => m.FirstName, new { tabindex = 1 })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.FirstName)</td>
+                                </tr>
+                                <tr>
+                                	<td scope="row">Last Name: *</td>
+                                    <td>@this.Html.TextBoxFor(m => m.LastName, new { tabindex = 2 })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.LastName)</td>
+                                </tr>
+                                <tr>
+                                	<td scope="row">Email: *</td>
+                                    <td>@this.Html.TextBoxFor(m => m.Email, new { tabindex = 3, disabled = "disabled" })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.Email)</td>
+                                </tr>
+                                <tr>
+                                	<td scope="row">Organization: *</td>
+                                    <td>@this.Html.TextBoxFor(m => m.Organization, new { tabindex = 4 })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.Organization)</td>
+                                </tr>
+                                <tr>
+                                	<td scope="row">Title:</td>
+                                    <td>@this.Html.TextBoxFor(m => m.Title, new { tabindex = 5 })</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="validation">&nbsp;@this.Html.ValidationMessageFor(m => m.Title)</td>
+                                </tr>
+                                <tr>
+                                	<td colspan="2" class="right"><input type="submit" value="Save Changes" class="action_button" /></td>
+                                </tr>
+                            </table>
+  } 

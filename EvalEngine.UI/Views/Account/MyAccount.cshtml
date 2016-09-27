@@ -1,0 +1,55 @@
+﻿@{
+	ViewBag.Title = "My Account";
+}
+
+@using EvalEngine.Domain.Entities
+    	<div class="content_header">
+        	<h4>Manage Accounts</h4>
+        </div><!--end content_header-->
+    	<div class="content">
+            <div class="tab-wrapper">
+            	<div class="tab down"><a href="@this.Url.Action("MyAccount", "Account")">My Account</a></div>
+                @if (HttpContext.Current.User.IsInRole(Constants.SiteAdministratorRole) || HttpContext.Current.User.IsInRole(Constants.ProjectAdminRole) || HttpContext.Current.User.IsInRole(Constants.StateAdminRole))
+                {
+                <div class="tab up"><a href="@this.Url.Action("Add", "Account")">Create New Account</a></div>
+                <div class="tab up"><a href="@this.Url.Action("Users", "Account")">Manage Accounts</a></div>}
+            </div><!--end tab-wrapper-->
+            <p class="directions">Update your account information below. Required fields are marked *.</p>
+            <div class="table-wrapper">
+            	<table class="table acct-info">
+                    <tr>
+                    	<td width="50%" class="info-left">
+                            @{Html.RenderPartial("MyAccountPartial", ViewData["MyAccountModel"]);}
+                        </td>
+                        <td width="50%" class="info-right">
+                        	@{Html.RenderPartial("ChangePasswordPartial", ViewData["ChangePasswordModel"]);}
+                        </td>
+                    </tr>
+                </table>
+            </div><!--end table-wrapper-->
+        </div><!--end content-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var tempX = 0;
+            var tempY = 0;
+            $(document).mousemove(function (e) {
+                var bodyOffsets = document.body.getBoundingClientRect();
+                tempX = e.pageX - bodyOffsets.left;
+                tempY = e.pageY;
+            });
+
+            $('a#pwdreq').hover(function () {
+                $('div.popup').load($(this).attr('href'));
+                $('div.popup').css({ 'top': tempY+5, 'left': tempX+5 }).show();
+                return false;
+            },
+            function () {
+                $('div.popup').hide();
+                return false;
+            });
+
+            $('a#pwdreq').click(function () {
+                return false;
+            });
+        });
+  </script>     

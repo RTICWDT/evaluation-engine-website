@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>iTextSharp</id>
+    <version>4.1.2</version>
+    <title>iTextSharp</title>
+    <authors>blowagie,  geraldhenson,  psoares33</authors>
+    <owners>blowagie,  geraldhenson,  psoares33</owners>
+    <projectUrl>http://itextsharp.sourceforge.net/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>iText# (iTextSharp) is a port of the iText open source java library for PDF generation written entirely in C# for the .NET platform. Use the iText mailing list to get support.</description>
+    <summary>iText# (iTextSharp) is a port of the iText open source java library for PDF generation written entirely in C# for the .NET platform. Use the iText mailing list to get support.</summary>
+    <references>
+      <reference file="itextsharp.dll" />
+    </references>
+  </metadata>
+</package>

@@ -1,0 +1,1 @@
+call casperjs EEAccountManager_tests.js

@@ -1,0 +1,87 @@
+﻿@model EvalEngine.UI.Models.ReportChart
+           
+<div style="border: #D4DADE 1px solid; margin-top: 20px; margin-bottom: 5px;">
+    <div id="chart@(Model.Rank.ToString())@(Model.Type.ToString())" class="@(Model.Type.ToString())"></div>
+    <script type="text/javascript">
+        var chartName = "#chart" + "@Model.Rank.ToString()" + "@Model.Type.ToString()";
+        var svg = dimple.newSvg(chartName, 480, 300);
+        var data = data = [
+            { "Label": "Intervention Group", "Value": @Model.ChartData_Intervention },
+            { "Label": "Matched Control", "Value": @Model.ChartData_Control }
+        ];
+        var chart = new dimple.chart(svg, data);
+        chart.setBounds(65, 45, 405, 215);
+        var x = chart.addCategoryAxis("x", "Label");
+        var y = chart.addMeasureAxis("y", "Value");
+        var s = chart.addSeries("Value", dimple.plot.bar);
+        y.hidden = true;
+        x.showGridlines = false;
+        x.addOrderRule("Label", true);
+        s.barGap = .5;
+
+        // Handle the hover event - overriding the default behaviour
+        s.addEventHandler("mouseover", onHover);
+        // Handle the leave event - overriding the default behaviour
+        s.addEventHandler("mouseleave", onLeave);
+
+        chart.assignColor("Control","#325D87");
+        chart.assignColor("Treatment","#E8750C");
+        chart.draw();
+
+        x.titleShape.remove();
+        x.shapes.selectAll("text").attr('style', 'font-size:13px;font-family: "Gill Sans MT", Calibri, sans-serif;color:#555;').attr("transform", "translate(-48,0)").attr('fill', '#555');
+        s.shapes.each(function(d) {
+
+            // Get the shape as a d3 selection
+            var shape = d3.select(this),
+                // Get the height and width from the scales
+                height = chart.y + chart.height - y._scale(d.height);
+            width = x._scale(d.width);
+            textvalue = d.yValue;
+            if ("@Model.Type" == "pp" || "@Model.Format" == "percent") {
+                textvalue = d.yValue + "%";
+            } else {
+                textvalue = d.yValue;
+            }
+
+
+            var posx = parseFloat(shape.attr("x")) + 51;
+            var posy = parseFloat(shape.attr("y")) - height + 40;
+            var textcolor = "white";
+            if (height < 55) {
+                posy = parseFloat(shape.attr("y")) - height - 10;
+                textcolor = "black";
+
+            }
+
+            // Add a text label for the value
+            svg.append("text")
+
+                // Position in the centre of the shape (vertical position is
+                // manually set due to cross-browser problems with baseline)
+                .attr("x", posx)
+                .attr("y", posy)
+
+                // Centre align
+                .style("text-anchor", "middle")
+                .style("font-size", "30px")
+                .style("font-family", "\"Gill Sans\", \"Gill Sans MT\", Calibri, sans-serif;")
+                .style("fill", textcolor)
+
+                // Format the number
+                .text(textvalue);
+
+        });
+
+        // Event to handle mouse enter
+        function onHover(e) {
+
+        };
+
+        // Event to handle mouse exit
+        function onLeave(e) {
+        };
+    </script>
+
+
+</div>

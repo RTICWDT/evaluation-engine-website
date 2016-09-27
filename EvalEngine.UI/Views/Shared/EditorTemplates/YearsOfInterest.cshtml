@@ -1,0 +1,10 @@
+﻿﻿@model EvalEngine.UI.Models.CheckboxItem
+<style>
+  .item {white-space: nowrap;display:inline;margin-left:25px;  }
+</style>
+<br />
+<div class="item">
+   <span class="block">@this.Html.HiddenFor(x => x.Value, new { @class="year" })
+    @this.Html.CheckBoxFor(x => x.Checked, new { @class = "year" })
+    @this.Html.LabelFor(x => x.Checked, (string) Model.Label)</span>
+</div>

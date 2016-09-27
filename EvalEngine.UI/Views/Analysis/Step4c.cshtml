@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Evaluation Engine Report - User Provided Descriptions";
+}
+@model EvalEngine.UI.Models.Step4Model
+@using Svg;
+@using System.Text;
+@using EvalEngine.UI.Helpers;
+
+<style>
+
+</style>
+
+<div class="form-container">
+	<div class="form-step step-4"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="View Results" /></div>
+	<div class="form-tips-narrow">
+		<div style="">
+		    <div class="report-section-wrapper">
+			    <span class="dropdown">
+				    <h1>Report Sections</h1>
+					    <ul>
+						    <li><a href="@Url.Action("Step4", "Analysis", new { id = ViewBag.ID })">Overall Results</a></li>
+                            <li><a href="@Url.Action("Step4a", "Analysis", new { id = ViewBag.ID })">Subgroup Analysis</a></li>
+						    <li><a href="@Url.Action("Step4b", "Analysis", new { id = ViewBag.ID })">Data and Statistical Methods</a></li>
+						    <li><a class="selected" href="@Url.Action("Step4c", "Analysis", new { id = ViewBag.ID })">User Descriptions</a> </li>
+					    </ul>
+			    </span>
+                <br />
+                <a href="@Url.Action("Step4Rota", "Analysis", new { id = ViewBag.ID })"><img src="@Url.Content("~/Content/inc/img/pdficon_small.png")" /> Download Report</a></div>
+		</div>
+        <br />
+</div>
+<div class="form-output">
+		<h1>User Descriptions</h1>
+      <div class="indent">
+		<br />
+        <p style="padding-bottom:5px;color:#F2790C;font-weight:600;">Name of intervention group</p>
+		<p>@Model.Report.StudyName</p>
+        <br />
+        <p style="padding-bottom:5px;color:#F2790C;font-weight:600;">Description of intervention</p>
+        <p>@Model.Report.StudyDescription</p>
+        <br />
+        <p style="padding-bottom:5px;color:#F2790C;font-weight:600;">Title of report</p>
+		<p>@Model.Report.AnalysisName</p>
+        <br />
+        <p style="padding-bottom:5px;color:#F2790C;font-weight:600;">Description of analysis</p>
+          <p>@Model.Report.AnalysisDescription</p>
+          <p>@Html.Raw(Model.Report.LibraryEntry.Params)</p>
+	  </div>
+	</div><!--end form-->
+</div><!--end form-container-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.table-note-container').each(function () {
+            var index = $(this).index($('.table-note-container'));
+            $(this).css("height", $('.table-container').eq(index).height());
+        });
+        $('.chart-note-container').each(function () {
+            var index = $(this).index($('.chart-note-container'));
+            $(this).css("height", $('.chart-container').eq(index).height());
+        });
+    });
+</script>

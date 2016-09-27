@@ -1,0 +1,190 @@
+@{
+    ViewBag.Title = "Step4";
+    Layout = null; 
+}
+@model EvalEngine.UI.Models.Step4Model
+@using Svg;
+@using System.Text;
+@using EvalEngine.UI.Helpers;
+@using EvalEngine.Domain.Entities
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1">
+<title>@ViewBag.Title</title>	
+<link rel="stylesheet" href="@Url.Content("~/Content/inc/css/reset-fonts-grids.css")" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/inc/css/pdf-styles.css")" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/inc/css/jquery-ui.css")" type="text/css" /> 
+<style>
+ 
+body 
+{
+    margin-left:200px;
+    height:10in;
+}
+    
+div.pagebreak {page-break-after:always;}
+div.pp {page-break-after:always;}
+
+div.chart-container{page-break-before:auto;}
+
+.dropdown div{
+	display:none;
+}
+
+.dropdown:hover div{
+	display:block;
+	position:absolute;
+	background-color:#fff;
+	border:#D4DADE 1px solid;
+	padding:10px;
+	margin-top:-3px;
+	-webkit-box-shadow: 2px 2px 2px #ddd;	
+	-moz-box-shadow: 2px 2px 2px #ddd;
+	box-shadow: 2px 2px 2px #ddd;
+	width:130px;
+}
+
+ul.dropdown-nav{
+	margin-left:0;
+	padding-left:0;
+}
+
+ul.dropdown-nav li{
+	list-style-type:none;
+
+}
+
+td.a-right{
+	text-align:right;
+}
+
+div.coverpage
+{
+    margin-top:20px;margin-bottom:0px;background:white;margin-left:-200px;
+
+    width:11in;
+}
+
+div.header
+{
+    width:80%;
+    background:#1E487D;
+    float:right;
+    padding:30px;
+    text-align:center;
+}
+
+span.header
+{
+	color:#FFF; 
+	font-size:40px;
+	margin:10px;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+	line-height:1em;
+}
+
+div.byline
+{
+    width:60%;
+    background:#fff;
+    text-align:right;
+    margin-top:-20px;
+    z-index:10000;
+    position:absolute;
+    left:420px;
+}
+
+div.byline span
+{
+    font-style:italic;
+    font-size:25px;
+    line-height:1.5em;
+    color:#4E81BD;
+}
+
+
+div.coverpage img
+{
+    padding-top:20px;
+    margin-left:auto;
+    margin-right:auto;
+    display: block;
+}
+
+.indent
+{
+    padding-left:20px;
+    padding-right:20px;
+}
+
+div.bottom
+{
+    position:absolute;
+    vertical-align:bottom;
+    top:13in;
+    width:inherit;
+    text-align:center;
+    color:#1E487D;
+}
+
+div.footer
+{
+    position:absolute;
+    vertical-align:bottom;
+    top:13.7in;
+    width:inherit;
+    text-align:center;
+    color:#1E487D;
+    font-family: "Gill Sans","Gill Sans MT",Calibri,sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;    
+    padding-top:5px;
+}
+
+.ee-logo{
+	margin-left:21px;
+}
+
+.header-line{
+	border-bottom:#C1C1C1 2px solid;
+	float:right;
+	margin:-29px 0 0 352px;
+	position:absolute;
+	width:409px; 
+	-webkit-box-shadow: 1px 1px 1px #fff;	
+	-moz-box-shadow: 1px 1px 1px #fff;	
+	box-shadow: 1px 1px 1px #fff;
+}
+
+h1
+{
+    text-transform:uppercase;
+    color:rgb(108, 127, 140);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+}
+
+.vcenter
+{
+    height:14in;
+    width:11in;
+    position:absolute;
+    top:2in;
+}
+</style>
+</head>
+<body>
+        <div class="coverpage">
+            <div class="vcenter">
+                <ul>
+                <li><a href="#OverallResults">Overall Results</a></li>
+                <li>Subgroup Analysis</li>
+                <li>Data and Statistical Methods</li>
+                <li>User Descriptions</li>
+                </ul>
+            </div>
+        </div>
+</body>
+</html>

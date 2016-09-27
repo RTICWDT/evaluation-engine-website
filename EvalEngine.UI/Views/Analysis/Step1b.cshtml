@@ -1,0 +1,45 @@
+﻿@{
+	ViewBag.Title = "Step 1. Participant Data";
+}
+
+@model EvalEngine.UI.Models.Step1BModel
+  @using (Html.BeginForm("Step1B", "Analysis", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  {
+	@Html.AntiForgeryToken()
+	<div class="form-container">
+	<div class="form-step step-1"><img src="@Url.Content("~/Content/inc/img/clear.png")" height="1" width="1" alt="Participants" /></div>
+	<div class="form-tips">
+		<h2>Helpful Information</h2>
+		<p>Upload IDs for a single cohort of students—that is, students who were in the same grade at the time their participation in the intervention began. To analyze additional groups or grade levels of students, start a new study.</p>
+	</div><!--end form-tips-->
+	<div class="form">
+		<h2>Step 1. Participant Data</h2>
+		<h3>Upload participant ID<span style="text-transform:lowercase;">s</span></h3>
+		<p>Upload IDs for students in the treatment of interest. This list will constitute the “intervention” group for which a matched comparison group will be created. Upload only a single cohort of students. See more information at right.</p>
+		<div class="question">
+			<p class="one">Download Template</p>
+			<span class="block sub">Evaluation Engine accepts Comma-Separated Values (CSV) and Tab-Delimited file formats. Your file must include the unique student IDs used by your state, as indicated on the previous page.</span>
+			<span class="block sub"><a href="@Url.Content("~/Content/inc/files/EE ID Submission Template.xlsx")">ID Submission Template</a> <span class="sm-font">(XLS, 35 KB)</span></span>
+		</div>
+		<div class="question">
+            <p><font style="color:#FF2222">@TempData["message"]</font></p>
+			<p class="two">Upload File (for a single cohort of students)</p>
+			<div class="answer-wrap">
+				<span class="block"><input type="file" name="file" id="etlfileToUpload" /></span>
+				<!--<span class="block pad"><input type="button" value="Upload" class="action_button" /></span>-->
+			</div>
+			<div id="uploading"></div>
+		</div>
+
+		<div class="question">
+			<p class="two">Or, enter IDs (for a single cohort of students)</p>
+			<span class="block sub">Cut and paste the unique student IDs into the box below. Use commas to separate entries.</span>
+			<span class="block sub">@Html.TextAreaFor(m => m.ParticipantText, new { id = "textarea", style = "width:557px;height:150px;" })</span>
+		</div>
+	</div><!--end form-->
+	<div class="form-buttons">
+		<input type="submit" value="Back" class="cancel_button" name="submitForm"/>&nbsp;&nbsp;
+		<input type="submit" value="Save &amp; Continue" class="action_button" name="submitForm" />
+	</div>
+	</div><!--end form-container-->
+  }

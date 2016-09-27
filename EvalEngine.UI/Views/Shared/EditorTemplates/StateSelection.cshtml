@@ -1,0 +1,10 @@
+﻿﻿@model EvalEngine.UI.Models.StateSelection
+<style>
+  .item {white-space: nowrap;display:inline;margin-left:25px;  }
+</style>
+<br />
+<div class="item">
+    @this.Html.HiddenFor(x => x.StateId)
+    @this.Html.CheckBoxFor(x => x.IsChecked)
+    @this.Html.LabelFor(x => x.IsChecked, (string) Model.StateName)
+</div>
