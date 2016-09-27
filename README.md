@@ -26,8 +26,11 @@ Finally, the Statistical Component is where the actual calculations occur. It is
 	* RServerURL -> URL of R server project
 	* EvalEngineConnectionString -> website database
 	* EEMessengerConnectionString -> WebRServerMessages database
+	
 * Deploy each of the four databases necessary for running the Evaluation Engine website. 
 	* Database -> website database, committed using SQL Source Control
 	* WebRServerMessagesDatabase -> communication between various components, uses SQL Source Control
 	* crosswalk.sql -> postgres databse with one table, the crosswalk table
-	* data-warehouse.sql -> SQL Server data warehouse, will need to be filled with real data.
+	* data-warehouse/data-warehouse.sql -> SQL Server data warehouse, will need to be filled with real data.
+
+* For preparing data, exampine the documents in the data-warehouse folder.
