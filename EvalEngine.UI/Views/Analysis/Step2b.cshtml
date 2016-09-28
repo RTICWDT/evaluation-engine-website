@@ -234,10 +234,11 @@ div.measures{ padding-left:15px;}
       }
 
       $(document).ready(function () {
+      //alert($('#StartDate').val());
           var startdate = $('#StartDate').val().split('/');
           var startyear = startdate[2].split(' ');
-          $('select#smonth').val(startdate[0]);
-          $('select#sday').val(startdate[1]);
+          $('select#smonth').val(("0"+startdate[0]).slice(-2));
+          $('select#sday').val(("0"+startdate[1]).slice(-2));
           $('select#syear').val(startyear[0]);
           //var enddate = $('#EndDate').val().split('/');
           //var endyear = enddate[2].split(' ');
