@@ -33,4 +33,4 @@ Finally, the Statistical Component is where the actual calculations occur. It is
 	* crosswalk.sql -> postgres databse with one table, the crosswalk table
 	* data-warehouse/data-warehouse.sql -> SQL Server data warehouse, will need to be filled with real data.
 
-* For preparing data, exampine the documents in the data-warehouse folder.
+* For preparing data, examine the documents in the data-warehouse folder.
