@@ -82,7 +82,7 @@
 
                                   // Format the number
                                   .text(textvalue);
-                              if (d.aggField[1] !== '-') {
+                              if (d.aggField[1] !== '-' && "@Model.Type" !== "pp") {
                                   svg.append("text")
                                       .attr("x", posx)
                                       .attr("y", posy + width / 2)
@@ -92,7 +92,6 @@
                                       .style("fill", textcolor)
                                       //.text('(0.23)');
                                       .text('(' + (d.aggField[1]/100).toFixed(1) + ')');
-                              }
 
                               svg.selectAll("title_text")
                                   .data(["Standard deviations", "are in parentheses"])
@@ -104,6 +103,7 @@
                                   .style("fill", "#555")
                                   .style("font-size", "10px")
                                   .text(function(d) { return d; });
+                              }
                           });
 
                           // Event to handle mouse enter
