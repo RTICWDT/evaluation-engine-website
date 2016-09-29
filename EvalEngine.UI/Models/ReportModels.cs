@@ -1103,7 +1103,7 @@ namespace EvalEngine.UI.Models
                                 Label = Int32.TryParse(grades[i], out gradeValue) ? Ordinal(Convert.ToInt32(gradeValue)) : grades[i],
                                 Value = String.Format("{0:0.00}", ival),
                                 Type = "Treatment",
-                                SD = Double.TryParse(sdControls[i], out sdval) ? formatPercent(sdval.ToString(), 1) : "-"
+                                SD = Double.TryParse(sdInterventions[i], out sdval) ? formatPercent(sdval.ToString(), 1) : "-"
                             };
 
                             chartData.Add(cd);
@@ -1136,7 +1136,7 @@ namespace EvalEngine.UI.Models
                                 Label = Int32.TryParse(grades[i], out gradeValue) ? Ordinal(Convert.ToInt32(gradeValue)) : grades[i],
                                 Value = String.Format("{0:0}", Math.Ceiling(ival)),
                                 Type = "Treatment",
-                                SD = Double.TryParse(sdControls[i], out sdval) ? formatPercent(sdval.ToString(), 1) : "-"
+                                SD = Double.TryParse(sdInterventions[i], out sdval) ? formatPercent(sdval.ToString(), 1) : "-"
                             };
 
                             chartData.Add(cd);
