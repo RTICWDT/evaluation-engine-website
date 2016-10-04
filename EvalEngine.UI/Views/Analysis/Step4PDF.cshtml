@@ -482,7 +482,30 @@ div.supplemental table:nth-of-type(2):not(.table):not(.data):not(.appendix), div
         provably optimal matching algorithms.<sup><a href="#footnote14">14</a></sup></p>
         <br />
         <div class="sub-header"><h2>Outcome analysis</h2></div><a id="sm5"></a>
-        <p>Significance tests for the presence of an overall participation effect are (normal-theory approximations to) permutation tests, incorporating robust covariance adjustments for demographics and, when available, achievement in the prior year.  When intervention differences in scale 
+        <p>Significance tests begin by comparing treatment and comparison
+	subjects on a given outcome.  The Evaluation Engine’s
+	method of comparison uses a Winsorization procedure to limit
+	the influence of outlying observations; for achievement test
+	outcomes at grades 4-8, it also incorporates a robust
+	covariance adjustment for the prior year's test scores.  These
+	comparisons are then used in (normal-theory approximations to)
+	permutation tests. Such tests assess the magnitude of an
+	apparent trend in favor of the treatment group by repeatedly
+	reassigning labels of students as treatment or control,
+	independently in each matched set, and recording the apparent
+	trend in favor of the notional treatment group that was
+	created in this way; they then calculate the fraction of
+	notional treatment groups enjoying advantages over the
+	corresponding notional control groups as large or larger than
+	the actual treatment group's advantage over its matched
+	comparisons-the <em>p-value</em>.  When this p-value is small,
+	chance alone cannot readily explain the apparent trend in
+	favor of the treatment group. A second, complementary p-value
+	calculation characterizes the plausibility of a chance
+	explanation for an apparent trend to the advantage of the
+	control group. If either of these “one-sided”
+	p-values falls below 2.5%, the difference between the groups
+	is deemed statistically significant.  When differences in scale 
         scores and in proficiency levels are presented together, the significance level shown is for the scale score difference, not the proficiency level difference.</p>
         <br /><br />
               <p>If subgroup analyses were requested, the significance levels that accompany them differ in meaning depending on whether the estimated overall effect was significant and in favor of the program. When participants' values of a given outcome are significantly higher than those of their matched counterparts, the subgroup analysis that follows tests whether the benefit experienced by the selected subgroups differed from the overall average benefit of participation in the intervention program. On the other hand, if participants' values tend to be lower than those of their matched counterparts (or if there is no consistent and statistically meaningful trend) then the Evaluation Engine tests for program benefits separately within each subgroup.  The results of the two different types of subgroup analyses are presented in a similarly structured table.</p>        <br />
@@ -503,7 +526,7 @@ div.supplemental table:nth-of-type(2):not(.table):not(.data):not(.appendix), div
 	<br />
 	<p>The calculation is more complex if there are participants who could not be matched, if outcome information was unavailable for one or more matched subjects or if some participants differed from their matched counterparts in terms of key demographic characteristics.  If there are participants who could not be matched, they do not contribute to the estimate of the program's benefit. (The estimate is of the effect of treatment on <em>those treated subjects who could be matched</em>, not all treated subjects irrespective of matchability.)  Participants matched only to controls lacking a value of a given variable do not contribute to the variable's participant mean, nor do these controls contribute to the variable's matched counterpart mean. Similarly, in order to contribute to the matched counterpart mean of a given variable, a non-participating student must be matched to a participant who is not missing a value on that variable.   (Balance calculations apply similar rules when missing values are found in baseline variables.)</p>
 	<br />
-	<p>If some participants were matched to counterparts differing from them on sex, race/ethnicity, economic disadvantage, special education (IDEA), or limited English proficiency, participant minus matched comparison value differences are calculated on indicator variables encoding each demographic categorization.  Then a linear model is used to adjust outcome differences, participants' outcomes minus corresponding matched comparison values, for these demographic covariate differences; the fitted model's intercept term, a covariance adjusted mean difference of participant and matched comparison outcomes, serves as the estimate of the program's benefit.</p>
+	<p>If some participants were matched to counterparts differing from them on sex, race/ethnicity, economic disadvantage, special education (IDEA), or limited English proficiency, participant minus matched comparison value differences are calculated on indicator variables encoding each demographic categorization.  Then a linear model is used to adjust outcome differences, participants' outcomes minus corresponding matched comparison values, for these demographic covariate differences. (In contrast with models used for significance testing, this model is fit by ordinary rather than robust regression; it does not attempt to adjust for prior test scores.) The fitted model's intercept term, a covariance adjusted mean difference of participant and matched comparison outcomes, serves as the estimate of the program's benefit.</p>
 
         <br />
 <!-- NB: `eem` references anchor below. If id changes, update `eem` constant link.to.sensitivity.section.of.Report-->
